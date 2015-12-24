@@ -8,6 +8,11 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\Server_Packet.gml</script>
+    <script>scripts\Packet_1.gml</script>
+    <script>scripts\buffer_reset.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\Network</object>
     <object>objects\Player</object>
