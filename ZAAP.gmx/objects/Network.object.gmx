@@ -25,13 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Buffer = buffer_create(1024,buffer_fixed,1)
+            <string>buffer = buffer_create(1024,buffer_fixed,1)
 port = 9000
-Server = network_create_server(network_socket_tcp,port,maxclients)
-SocketList = ds_list_create()
-Players = ds_map_create()
+maxclients = 9
+server = network_create_server(network_socket_tcp,port,maxclients)
+client = network_create_socket(network_socket_tcp)
+//network_connect(client,"127.0.0.1",9000)
+
+playerlist = ds_map_create()
 
 mode = "host"
+ping = 0
 
 </string>
           </argument>
@@ -60,33 +64,87 @@ switch(type)
     {
     case network_type_connect:
         {
-        socket = ds_map_find_value( async_load , "socket" );
-        ds_list_add( SocketList , socket );
-        ds_map_add(Players,socket,playerid)
-        break;
+        if Network.mode == "host"
+            {
+            socket = ds_map_find_value( async_load , "socket" );
+            player = instance_create(64,64,Player)
+            ds_map_add(playerlist,socket,player)
+            break;
+            }
         }
+//-----------------------------------------------------------//
     case network_type_disconnect:
         {
-        var socket = ds_map_find_value( async_load , "socket" );
-        var findsocket = ds_list_find_index( SocketList , socket );
-         
-        if ( findsocket &gt;= 0 )
+        if Network.mode == "host"
             {
-            ds_list_delete( SocketList , findsocket );
-            with ds_map_find_value(Players,socket)
-            instance_destroy()
-            ds_map_delete(Players,socket)
+            var socket = ds_map_find_value( async_load , "socket" );
+            var findsocket = ds_list_find_index( SocketList , socket );
+
+            if ( findsocket &gt;= 0 )
+                {
+                ds_list_delete( playerlist , findsocket );
+                with ds_map_find_value(players,socket)
+                instance_destroy()
+                ds_map_delete(players,socket)
+                }
+            break;
             }
-        break;
         }
+//----------------------------------------//
     case network_type_data:
         {
         var buffer = ds_map_find_value( async_load , "buffer" );
         var socket = ds_map_find_value( async_load , "id" );
-        buffer_seek( buffer , buffer_seek_start , 0 );
+        buffer_reset()
         Server_Packet(buffer,socket)
         }
    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(mouse_x,mouse_y,ping)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>game_end()
 </string>
           </argument>
         </arguments>
