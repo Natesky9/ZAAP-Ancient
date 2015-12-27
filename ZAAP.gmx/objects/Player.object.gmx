@@ -26,7 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>y += 4
-Send_Packet(Packet_10)
+if Network.mode != "host"
+    {
+    with Network
+    Send_Packet(Packet_10)
+    }
 </string>
           </argument>
         </arguments>
@@ -50,7 +54,11 @@ Send_Packet(Packet_10)
           <argument>
             <kind>1</kind>
             <string>x += 4
-Send_Packet(Packet_10)
+if Network.mode != "host"
+    {
+    with Network
+    Send_Packet(Packet_10)
+    }
 </string>
           </argument>
         </arguments>
@@ -74,7 +82,11 @@ Send_Packet(Packet_10)
           <argument>
             <kind>1</kind>
             <string>y -= 4
-Send_Packet(Packet_10)
+if Network.mode != "host"
+    {
+    with Network
+    Send_Packet(Packet_10)
+    }
 </string>
           </argument>
         </arguments>
@@ -98,33 +110,10 @@ Send_Packet(Packet_10)
           <argument>
             <kind>1</kind>
             <string>x -= 4
-Send_Packet(Packet_10)
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="13">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>with Network
+if Network.mode != "host"
     {
-    network_connect(socket,"127.0.0.1",9000)
-    mode = "client"
+    with Network
+    Send_Packet(Packet_10)
     }
 </string>
           </argument>

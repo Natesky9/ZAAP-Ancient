@@ -7,7 +7,7 @@ switch (going)
     {
     case "in":
         {
-        switch (mode)
+        switch (Network.mode)
             {
             //--------------------//
             case "host":
@@ -27,7 +27,7 @@ switch (going)
 //----------------------------------------//
     case "out":
         {
-        switch (mode)
+        switch (Network.mode)
             {
             //-----------------------//
             case "host":

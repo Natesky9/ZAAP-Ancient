@@ -25,18 +25,45 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>buffer = buffer_create(1024,buffer_fixed,1)
+            <string>mode = "host"
+buffer = buffer_create(1024,buffer_fixed,1)
 port = 9000
 maxclients = 9
+playerlist = ds_map_create()
+ 
 server = network_create_server(network_socket_tcp,port,maxclients)
 client = network_create_socket(network_socket_tcp)
-//network_connect(client,"127.0.0.1",9000)
 
-playerlist = ds_map_create()
+network_connect(client,"127.0.0.1",9000)
 
-mode = "host"
-ping = 0
 
+
+ping = -1
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if mode == "client"
+Send_Packet(Packet_1)
 </string>
           </argument>
         </arguments>
@@ -78,14 +105,14 @@ switch(type)
         if Network.mode == "host"
             {
             var socket = ds_map_find_value( async_load , "socket" );
-            var findsocket = ds_list_find_index( SocketList , socket );
+            var findsocket = ds_map_find_value(playerlist, socket );
 
             if ( findsocket &gt;= 0 )
                 {
-                ds_list_delete( playerlist , findsocket );
-                with ds_map_find_value(players,socket)
+                ds_map_delete( playerlist , findsocket );
+                with ds_map_find_value(playerlist,socket)
                 instance_destroy()
-                ds_map_delete(players,socket)
+                ds_map_delete(playerlist,socket)
                 }
             break;
             }
@@ -121,7 +148,10 @@ switch(type)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(mouse_x,mouse_y,ping)
+            <string>draw_text(16,16,"Server: " + string(server))
+draw_text(16,32,"Ping: " + string(ping))
+draw_text(mouse_x,mouse_y,ping)
+
 </string>
           </argument>
         </arguments>
@@ -145,6 +175,33 @@ switch(type)
           <argument>
             <kind>1</kind>
             <string>game_end()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>mode = "client"
+network_destroy(client)
+if !network_connect(client,"127.0.0.1",9000)
+mode = "host"
+
 </string>
           </argument>
         </arguments>
