@@ -6,28 +6,30 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\apple</sprite>
-    <sprite>sprites\sprite1</sprite>
-    <sprite>sprites\sprite2</sprite>
-    <sprite>sprites\sprite3</sprite>
+    <sprite>sprites\sprite0</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\Packet_Get_Client.gml</script>
-    <script>scripts\Packet_Get_Host.gml</script>
-    <script>scripts\Move.gml</script>
-    <script>scripts\Packet_4.gml</script>
+    <script>scripts\buffer_reset.gml</script>
+    <scripts name="Packet Scripts">
+      <script>scripts\Server_Packet.gml</script>
+      <script>scripts\Get_Packet.gml</script>
+      <script>scripts\Send_Packet.gml</script>
+      <scripts name="Packets">
+        <script>scripts\Packet_1.gml</script>
+        <script>scripts\Packet_10.gml</script>
+      </scripts>
+    </scripts>
+    <script>scripts\Packet_9.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\Host</object>
+    <object>objects\Network</object>
     <object>objects\Player</object>
-    <object>objects\Client</object>
-    <object>objects\GameObject</object>
+    <object>objects\Enemy</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
-    <room>rooms\room1</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
