@@ -108,6 +108,13 @@ if point_in_rectangle(mouse_x,mouse_y,
     draw_set_color(c_black)
     draw_text(room_width-16,16,text)
     }
+if mode != "choose"
+    {
+    draw_set_halign(fa_left)
+    draw_set_valign(fa_bottom)
+    draw_set_color(c_red)
+    draw_text(0,0,"Players: " + string(instance_number(Player)))
+    }
 </string>
           </argument>
         </arguments>
@@ -130,7 +137,9 @@ if point_in_rectangle(mouse_x,mouse_y,
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(Host.server)
+            <string>if instance_exists(Host)
+network_destroy(Host.server)
+if instance_exists(Client)
 network_destroy(Client.socket)
 game_restart()
 </string>

@@ -30,6 +30,7 @@
 //network_set_timeout(socket,100,100)
 
 buffer_client = buffer_create(1024,buffer_fixed,1)
+players = ds_map_create()
 
 result = 0
 ping = -1

@@ -16,11 +16,12 @@ switch(packet)
         }
     case 10:
         {
-        var play = ds_map_find_value(playerobjects,socket)
-        with (play)
-            {
-            x = buffer_read(buffer,buffer_s32)
-            y = buffer_read(buffer,buffer_s32)
-            }
+        var player = ds_map_find_value(playerobjects,socket)
+        var plax = buffer_read(buffer,buffer_s32)
+        var play = buffer_read(buffer,buffer_s32)
+        (player).x = (plax)
+        (player).y = (play)
+        Packet_11(socket,plax,play)
+        
         }
     }

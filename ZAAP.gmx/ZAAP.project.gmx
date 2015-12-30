@@ -18,16 +18,16 @@
     <script>scripts\Packet_Get_Host.gml</script>
     <script>scripts\Move.gml</script>
     <script>scripts\Packet_4.gml</script>
+    <script>scripts\Packet_11.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Host</object>
     <object>objects\Player</object>
     <object>objects\Client</object>
-    <object>objects\GameObject</object>
+    <object>objects\GameObject0</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room0</room>
-    <room>rooms\room1</room>
+    <room>rooms\Main</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
