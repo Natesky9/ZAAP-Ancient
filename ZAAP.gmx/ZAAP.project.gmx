@@ -19,6 +19,7 @@
     <script>scripts\Move.gml</script>
     <script>scripts\Packet_4.gml</script>
     <script>scripts\Packet_11.gml</script>
+    <script>scripts\Packet_5.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Host</object>

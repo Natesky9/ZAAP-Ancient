@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>socket = network_create_socket(network_socket_tcp)
+            <string>cliend_socket = -4
+sock = -4
+
+client_socket = network_create_socket(network_socket_tcp)
+
 //network_set_config(network_config_connect_timeout,100)
 //network_set_timeout(socket,100,100)
 
@@ -60,7 +64,7 @@ ii = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(socket)
+            <string>network_destroy(client_socket)
 buffer_delete(buffer_client)
 </string>
           </argument>
@@ -89,7 +93,7 @@ buffer_delete(buffer_client)
     buffer_seek(buffer_client,buffer_seek_start,0);
     buffer_write(buffer_client,buffer_u8,1);
     buffer_write(buffer_client,buffer_u32,current_time);
-    network_send_packet(socket,buffer_client,buffer_tell(buffer_client));
+    network_send_packet(client_socket,buffer_client,buffer_tell(buffer_client));
     }
 
 </string>
@@ -114,7 +118,7 @@ buffer_delete(buffer_client)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(socket)
+            <string>network_destroy(client_socket)
 
 </string>
           </argument>
@@ -139,7 +143,7 @@ buffer_delete(buffer_client)
           <argument>
             <kind>1</kind>
             <string>
-connected = network_connect(socket,"127.0.0.1",2244)
+connected = network_connect(client_socket,"127.0.0.1",2244)
 </string>
           </argument>
         </arguments>
@@ -206,10 +210,14 @@ sprite_index = sprite2
 draw_sprite(sprite_index,0,x,y)
 draw_set_halign(fa_right)
 draw_text(room_width,0+32,"Connected: " + string(connected &gt;= 0))
-draw_text(room_width,48,socket)
+//draw_text(room_width,48,socket)
 draw_text(room_width,y+64,"Packets: " + string(ping))
 
 draw_text(room_width,y + 128,current_time)
+draw_set_valign(fa_bottom)
+
+draw_text(room_width,room_height,"Client Socket: " + string(client_socket))
+draw_text(room_width,room_height-32,"Assigned Socket: " + string(sock))
 </string>
           </argument>
         </arguments>

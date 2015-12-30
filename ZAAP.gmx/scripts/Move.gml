@@ -7,5 +7,5 @@ buffer_write(buffer_client,buffer_s32,obj.x)
 buffer_write(buffer_client,buffer_s32,obj.y)
 buffer_write(buffer_client,buffer_s32,obj.sock)
 
-network_send_packet(socket,buffer_client,buffer_tell(buffer_client))
+network_send_packet(client_socket,buffer_client,buffer_tell(buffer_client))
 

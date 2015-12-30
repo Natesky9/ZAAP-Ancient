@@ -1,5 +1,5 @@
 var buff = argument[0];
-packet = buffer_read(buff,buffer_u8);
+var packet = buffer_read(buff,buffer_u8);
 
 switch(packet)
     {
@@ -11,11 +11,20 @@ switch(packet)
         }
     case 4:
         {//client spawn
-        sock = buffer_read(buff,buffer_u8)
+        var sock = buffer_read(buff,buffer_u8)
+
+            var pal = instance_create(128,128,Player)
+            ds_map_add(players,sock,pal)
+            pal.sock = sock
+        }
+    case 5:
+        {
+        var sock = buffer_read(buff,buffer_u8)
+        var plax = buffer_read(buff,buffer_s32)
+        var play = buffer_read(buff,buffer_s32)
         
-        var pal = instance_create(64,64,Player)
-        ds_map_add(players,sock,pal)
-        pal.sock = sock
+        var pal = instance_create(plax,play,Player)
+        (pal).sock = sock
         }
 /*    
     case 10:

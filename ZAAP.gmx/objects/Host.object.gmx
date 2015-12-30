@@ -53,7 +53,8 @@ playerobjects = ds_map_create()
             <kind>1</kind>
             <string>network_destroy(server)
 buffer_delete(buffer_host)
-ds_map_destroy(players)
+ds_list_destroy(playerlist)
+ds_map_destroy(playerobjects)
 </string>
           </argument>
         </arguments>
@@ -123,6 +124,7 @@ ds_map_destroy(players)
           <argument>
             <kind>1</kind>
             <string>var event = ds_map_find_value(async_load,"type")
+var buffer,socket,player
 switch (event)
     {
 //-----------------------------------//
@@ -131,16 +133,17 @@ switch (event)
         socket = ds_map_find_value(async_load,"socket")
         ds_list_add(playerlist,socket)
         player = instance_create(64,64,Player)
-        player.owner = socket
+        player.sock = string(socket)
         ds_map_add(playerobjects,socket,player)
         
         Packet_4(socket)
+//        Packet_5(socket)
         break
         }
 //-----------------------------------//
     case network_type_disconnect:
         {
-        var socket = ds_map_find_value(async_load,"socket")
+        socket = ds_map_find_value(async_load,"socket")
         var findsocket = ds_list_find_index(playerlist,socket)
         
         if (findsocket &gt;= 0)
@@ -156,8 +159,8 @@ switch (event)
 //-----------------------------------//
     case network_type_data:
         {
-        var buffer = ds_map_find_value(async_load,"buffer")
-        var socket = ds_map_find_value(async_load,"id")
+        buffer = ds_map_find_value(async_load,"buffer")
+        socket = ds_map_find_value(async_load,"id")
         buffer_seek(buffer,buffer_seek_start,0)
         Packet_Get_Host(buffer,socket)
         break
@@ -193,6 +196,10 @@ draw_text(0,0,"Server Status: " + string(server &gt;= 0))
 draw_text(0,16,"Total Clients: " + string(ds_list_size(playerlist)))
 
 draw_sprite(sprite1,0,x,y)
+
+draw_text(0,64,"Player0: " + string(ds_list_find_value(playerlist,0)))
+draw_text(0,80,"Player0: " + string(ds_list_find_value(playerlist,1)))
+draw_text(0,96,"Player0: " + string(ds_list_find_value(playerlist,2)))
 </string>
           </argument>
         </arguments>

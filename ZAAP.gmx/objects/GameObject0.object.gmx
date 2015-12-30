@@ -48,18 +48,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if point_in_rectangle(mouse_x,mouse_y,
-join_x2,join_y1,join_x1,join_y2)
+            <string>if mode == "choose"
     {
-    instance_create(room_width-32,32,Client)
-    mode = "client"
-    }
-
-if point_in_rectangle(mouse_x,mouse_y,
-    host_x1,host_y1,host_x2,host_y2)
-    {
-    instance_create(32,32,Host)
-    mode = "host"
+    if point_in_rectangle(mouse_x,mouse_y,
+    join_x2,join_y1,join_x1,join_y2)
+        {
+        instance_create(room_width-32,32,Client)
+        mode = "client"
+        }
+    
+    if point_in_rectangle(mouse_x,mouse_y,
+        host_x1,host_y1,host_x2,host_y2)
+        {
+        instance_create(32,32,Host)
+        mode = "host"
+        }
     }
 </string>
           </argument>
@@ -140,7 +143,7 @@ if instance_number(Player) &gt; 0
             <string>if instance_exists(Host)
 network_destroy(Host.server)
 if instance_exists(Client)
-network_destroy(Client.socket)
+network_destroy(Client.client_socket)
 game_restart()
 </string>
           </argument>
