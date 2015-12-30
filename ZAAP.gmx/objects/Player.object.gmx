@@ -48,8 +48,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with Client
-Move(other.id)
+            <string>if sock == Client.client_socket
+    {
+    with Client
+    Packet_10(other.id)
+    }
 </string>
           </argument>
         </arguments>
@@ -72,7 +75,7 @@ Move(other.id)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
+            <string>if sock == Client.client_socket
 y += 1
 </string>
           </argument>
@@ -96,7 +99,7 @@ y += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
+            <string>if sock == Client.client_socket
 x += 1
 </string>
           </argument>
@@ -120,7 +123,7 @@ x += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
+            <string>if sock == Client.client_socket
 y -= 1
 </string>
           </argument>
@@ -144,7 +147,7 @@ y -= 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
+            <string>if sock == Client.client_socket
 x -= 1
 </string>
           </argument>
@@ -197,8 +200,10 @@ draw_set_valign(fa_top)
 draw_sprite(apple,0,x,y)
 if instance_exists(Client)
     {
-    draw_text(x,y+32,sock)
+    draw_set_color(c_green)
     }
+else draw_set_color(c_red)
+draw_text(x,y+32,sock)
 </string>
           </argument>
         </arguments>

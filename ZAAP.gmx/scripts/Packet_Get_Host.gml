@@ -21,7 +21,7 @@ switch(packet)
         var play = buffer_read(buffer,buffer_s32)
         (player).x = (plax)
         (player).y = (play)
-//        Packet_11(socket_in,plax,play)
+        Packet_11(socket_in,plax,play)
         
         }
     }

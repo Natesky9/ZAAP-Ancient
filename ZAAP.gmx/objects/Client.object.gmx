@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>cliend_socket = -4
-sock = -4
+            <string>client_sock = -1
 
 client_socket = network_create_socket(network_socket_tcp)
 
@@ -216,8 +215,7 @@ draw_text(room_width,y+64,"Packets: " + string(ping))
 draw_text(room_width,y + 128,current_time)
 draw_set_valign(fa_bottom)
 
-draw_text(room_width,room_height,"Client Socket: " + string(client_socket))
-draw_text(room_width,room_height-32,"Assigned Socket: " + string(sock))
+draw_text(room_width,room_height,"Client Socket: " + string(client_sock))
 </string>
           </argument>
         </arguments>

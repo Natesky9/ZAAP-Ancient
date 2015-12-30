@@ -51,10 +51,30 @@ playerobjects = ds_map_create()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(server)
-buffer_delete(buffer_host)
-ds_list_destroy(playerlist)
-ds_map_destroy(playerobjects)
+            <string>draw_set_color(c_black)
+draw_set_halign(fa_left)
+draw_set_valign(fa_top)
+draw_text(0,0,"Server Status: " + string(server &gt;= 0))
+draw_text(0,16,"Total Clients: " + string(ds_list_size(playerlist)))
+
+draw_sprite(sprite1,0,x,y)
+
+var i = 0
+repeat 3
+    {
+    var p = ds_list_find_value(playerlist,i)
+    draw_text(0,64+16*i,"Player "+string(i)+": "+ string(p))
+    if !is_undefined(p)
+        {
+        var po = ds_map_find_value(playerobjects,p)
+        var px = po.x
+        var py = po.y
+        draw_set_color(c_white)
+        draw_line(64,64+16*i,px,py)
+        }
+    i += 1
+    }
+
 </string>
           </argument>
         </arguments>
@@ -133,11 +153,11 @@ switch (event)
         socket = ds_map_find_value(async_load,"socket")
         ds_list_add(playerlist,socket)
         player = instance_create(64,64,Player)
-        player.sock = string(socket)
+        player.sock = socket
         ds_map_add(playerobjects,socket,player)
         
         Packet_4(socket)
-//        Packet_5(socket)
+        Packet_5(socket)
         break
         }
 //-----------------------------------//
@@ -197,9 +217,22 @@ draw_text(0,16,"Total Clients: " + string(ds_list_size(playerlist)))
 
 draw_sprite(sprite1,0,x,y)
 
-draw_text(0,64,"Player0: " + string(ds_list_find_value(playerlist,0)))
-draw_text(0,80,"Player0: " + string(ds_list_find_value(playerlist,1)))
-draw_text(0,96,"Player0: " + string(ds_list_find_value(playerlist,2)))
+var i = 0
+repeat 3
+    {
+    var p = ds_list_find_value(playerlist,i)
+    draw_text(0,64+16*i,"Player "+string(i)+": "+ string(p))
+    if !is_undefined(p)
+        {
+        var po = ds_map_find_value(playerobjects,p)
+        var px = po.x
+        var py = po.y
+        draw_set_color(c_white)
+        draw_line(64,64+16*i,px,py)
+        }
+    i += 1
+    }
+
 </string>
           </argument>
         </arguments>
