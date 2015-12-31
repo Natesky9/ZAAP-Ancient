@@ -166,7 +166,7 @@ switch (event)
         socket = ds_map_find_value(async_load,"socket")
         var findsocket = ds_list_find_index(playerlist,socket)
         
-        if (findsocket &gt;= 0)
+        if findsocket == 0
             {
             with (ds_map_find_value(playerobjects,socket))
             instance_destroy()

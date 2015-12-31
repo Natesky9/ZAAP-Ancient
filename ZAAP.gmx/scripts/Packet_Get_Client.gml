@@ -9,6 +9,7 @@ switch(packet)
         ping = current_time - time;
         break;
         }
+//-----------------------------------------//
     case 4:
         {//client spawn
         client_sock = buffer_read(buff,buffer_u8)
@@ -18,6 +19,7 @@ switch(packet)
         pal.sock = client_sock
         break
         }
+//-----------------------------------------//
     case 5:
         {
         var num = buffer_read(buff,buffer_u8)
@@ -29,6 +31,7 @@ switch(packet)
         (pal).sock = socks
         break
         }
+//-----------------------------------------//
 /*    
     case 10:
         {
@@ -43,8 +46,11 @@ switch(packet)
         var plax = buffer_read(buff,buffer_s32)
         var play = buffer_read(buff,buffer_s32)
         player = ds_map_find_value(players,plsocket)
-        (player).x = (plax)
-        (player).y = (play)
+        if instance_exists(player)
+            {
+            (player).x = (plax)
+            (player).y = (play)
+            }
         break
         }
         break

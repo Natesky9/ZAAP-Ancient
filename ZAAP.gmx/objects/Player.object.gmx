@@ -50,10 +50,13 @@
             <kind>1</kind>
             <string>if instance_exists(Client)
     {
-    if sock == Client.client_socket
+    show_debug_message("test")
+    if sock == Client.client_sock
         {
+        show_debug_message(sock)
+        show_debug_message(Client.client_socket)
         with Client
-        Packet_10(other.id)
+        Packet_10(other.x,other.y)
         }
     }
 </string>
