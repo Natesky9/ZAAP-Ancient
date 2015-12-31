@@ -14,7 +14,7 @@ for (i = 0;i <= p;i += 1)
         {
         buffer_seek(buffer_host,buffer_seek_start,0)
         buffer_write(buffer_host,buffer_u8,11)
-        buffer_write(buffer_host,buffer_u8,pl_socket)
+        buffer_write(buffer_host,buffer_u8,socket)
         buffer_write(buffer_host,buffer_s32,plax)
         buffer_write(buffer_host,buffer_s32,play)
         

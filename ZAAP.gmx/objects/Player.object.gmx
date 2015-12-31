@@ -48,10 +48,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_socket
+            <string>if instance_exists(Client)
     {
-    with Client
-    Packet_10(other.id)
+    if sock == Client.client_socket
+        {
+        with Client
+        Packet_10(other.id)
+        }
     }
 </string>
           </argument>
@@ -75,7 +78,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_socket
+            <string>if sock == Client.client_sock
 y += 1
 </string>
           </argument>
@@ -99,7 +102,7 @@ y += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_socket
+            <string>if sock == Client.client_sock
 x += 1
 </string>
           </argument>
@@ -123,7 +126,7 @@ x += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_socket
+            <string>if sock == Client.client_sock
 y -= 1
 </string>
           </argument>
@@ -147,7 +150,7 @@ y -= 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_socket
+            <string>if sock == Client.client_sock
 x -= 1
 </string>
           </argument>
