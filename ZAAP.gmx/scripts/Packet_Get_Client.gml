@@ -23,11 +23,23 @@ switch(packet)
     case 5:
         {
         var num = buffer_read(buff,buffer_u8)
+        repeat num
+            {
+            var socks = buffer_read(buff,buffer_u8)
+            var plax = buffer_read(buff,buffer_s32)
+            var play = buffer_read(buff,buffer_s32)
+            
+            var pal = instance_create(plax,play,Player)
+            ds_map_add(players,socks,pal)
+            (pal).sock = socks
+            }
+        break
+        }//-----------------------------------------//
+    case 6:
+        {
         var socks = buffer_read(buff,buffer_u8)
-        var plax = buffer_read(buff,buffer_s32)
-        var play = buffer_read(buff,buffer_s32)
-        
-        var pal = instance_create(plax,play,Player)
+        var pal = instance_create(128,128,Player)
+        ds_map_add(players,socks,pal)
         (pal).sock = socks
         break
         }
@@ -45,11 +57,13 @@ switch(packet)
         var plsocket = buffer_read(buff,buffer_u8)
         var plax = buffer_read(buff,buffer_s32)
         var play = buffer_read(buff,buffer_s32)
-        player = ds_map_find_value(players,plsocket)
-        if instance_exists(player)
+        var player_temp = ds_map_find_value(players,plsocket)
+        show_debug_message(string(player_temp))
+        if !is_undefined(player_temp)
             {
-            (player).x = (plax)
-            (player).y = (play)
+            show_debug_message("updating player " + string(plsocket))
+            (player_temp).x = (plax)
+            (player_temp).y = (play)
             }
         break
         }

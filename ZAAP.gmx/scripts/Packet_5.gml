@@ -1,12 +1,14 @@
-var socket = argument0
+//send newly connected socket all previous sockets
 
-for (i = 0;i <= ds_list_size(playerlist)-1;i += 1)
+var socket = argument0
+var num = ds_list_size(playerlist)
+
+for (i = 0;i < num;i += 1)
     {
 
-    var num = ds_list_size(playerlist)
     buffer_seek(buffer_host,buffer_seek_start,0)
     buffer_write(buffer_host,buffer_u8,5)
-    buffer_write(buffer_host,buffer_u8,num)
+    buffer_write(buffer_host,buffer_u8,num-1)
     
     repeat num
         {
@@ -17,13 +19,11 @@ for (i = 0;i <= ds_list_size(playerlist)-1;i += 1)
             var plax = player_obj.x
             var play = player_obj.y
             buffer_write(buffer_host,buffer_u8,get_player)
-
             buffer_write(buffer_host,buffer_s32,plax)
             buffer_write(buffer_host,buffer_s32,play)
-            network_send_packet(socket,buffer_host,buffer_tell(buffer_host))
-            
-            
             }
+        network_send_packet(socket,buffer_host,buffer_tell(buffer_host))
+
         }
     }
 

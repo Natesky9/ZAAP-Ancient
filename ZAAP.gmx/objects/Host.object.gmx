@@ -157,7 +157,8 @@ switch (event)
         ds_map_add(playerobjects,socket,player)
         
         Packet_4(socket)
-        Packet_5(socket)
+//        Packet_5(socket)
+        Packet_6(socket)
         break
         }
 //-----------------------------------//
@@ -166,13 +167,13 @@ switch (event)
         socket = ds_map_find_value(async_load,"socket")
         var findsocket = ds_list_find_index(playerlist,socket)
         
-        if findsocket == 0
+        if findsocket &gt;= 0
             {
             with (ds_map_find_value(playerobjects,socket))
             instance_destroy()
             ds_list_delete(playerlist,findsocket)
             ds_map_delete(playerobjects,socket)
-            
+            Socket_7(socket)
             }
         break
         }

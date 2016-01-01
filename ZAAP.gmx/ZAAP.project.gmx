@@ -16,11 +16,12 @@
   <scripts name="scripts">
     <script>scripts\Packet_Get_Client.gml</script>
     <script>scripts\Packet_Get_Host.gml</script>
-    <script>scripts\Packet_10.gml</script>
     <script>scripts\Packet_4.gml</script>
-    <script>scripts\Packet_11.gml</script>
     <script>scripts\Packet_5.gml</script>
     <script>scripts\Packet_6.gml</script>
+    <script>scripts\Socket_7.gml</script>
+    <script>scripts\Packet_10.gml</script>
+    <script>scripts\Packet_11.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Host</object>
