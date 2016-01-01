@@ -1,8 +1,9 @@
-//send all previous sockets the newly connected 
+//send all previous sockets the newly connected
+show_debug_message("Sending Packet 6")
 
 var socket = argument0
 
-for (i = 0;i <= ds_list_size(playerlist)-1;i += 1)
+for (i = 0;i < ds_list_size(playerlist);i += 1)
     {
     buffer_seek(buffer_host,buffer_seek_start,0)
     buffer_write(buffer_host,buffer_u8,6)

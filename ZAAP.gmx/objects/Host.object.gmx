@@ -157,7 +157,7 @@ switch (event)
         ds_map_add(playerobjects,socket,player)
         
         Packet_4(socket)
-//        Packet_5(socket)
+        Packet_5(socket)
         Packet_6(socket)
         break
         }

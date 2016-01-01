@@ -23,7 +23,7 @@ switch(packet)
     case 5:
         {
         var num = buffer_read(buff,buffer_u8)
-        repeat num
+        repeat (num -1)
             {
             var socks = buffer_read(buff,buffer_u8)
             var plax = buffer_read(buff,buffer_s32)
