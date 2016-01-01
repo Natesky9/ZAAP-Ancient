@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>client_sock = -1
+            <string>sss = -1
 
 client_socket = network_create_socket(network_socket_tcp)
 
@@ -141,8 +141,9 @@ buffer_delete(buffer_client)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-connected = network_connect(client_socket,"127.0.0.1",2244)
+            <string>ip = get_string("Enter the ip to connect to","127.0.0.1")
+if connected &lt; 0
+connected = network_connect(client_socket,ip,2244)
 </string>
           </argument>
         </arguments>
@@ -201,7 +202,7 @@ switch (event)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if connected &gt; 0
+            <string>if connected &gt;= 0
 sprite_index = sprite3
 else
 sprite_index = sprite2
@@ -215,7 +216,7 @@ draw_text(room_width,y+64,"Packets: " + string(ping))
 draw_text(room_width,y + 128,current_time)
 draw_set_valign(fa_bottom)
 
-draw_text(room_width,room_height,"Client Socket: " + string(client_sock))
+draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
 </string>
           </argument>
         </arguments>

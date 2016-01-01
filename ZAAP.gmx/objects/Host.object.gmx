@@ -144,36 +144,36 @@ repeat 3
           <argument>
             <kind>1</kind>
             <string>var event = ds_map_find_value(async_load,"type")
-var buffer,socket,player
+var buffer,sss,player
 switch (event)
     {
 //-----------------------------------//
     case network_type_connect:
         {
-        socket = ds_map_find_value(async_load,"socket")
-        ds_list_add(playerlist,socket)
+        sss = ds_map_find_value(async_load,"socket")
+        ds_list_add(playerlist,sss)
         player = instance_create(64,64,Player)
-        player.sock = socket
-        ds_map_add(playerobjects,socket,player)
+        player.sock = sss
+        ds_map_add(playerobjects,sss,player)
         
-        Packet_4(socket)
-        Packet_5(socket)
-        Packet_6(socket)
+        Packet_4(sss)
+        Packet_5(sss)
+        Packet_6(sss)
         break
         }
 //-----------------------------------//
     case network_type_disconnect:
         {
-        socket = ds_map_find_value(async_load,"socket")
-        var findsocket = ds_list_find_index(playerlist,socket)
+        sss = ds_map_find_value(async_load,"socket")
+        var findsocket = ds_list_find_index(playerlist,sss)
         
         if findsocket &gt;= 0
             {
-            with (ds_map_find_value(playerobjects,socket))
+            with (ds_map_find_value(playerobjects,sss))
             instance_destroy()
             ds_list_delete(playerlist,findsocket)
-            ds_map_delete(playerobjects,socket)
-            Socket_7(socket)
+            ds_map_delete(playerobjects,sss)
+            Socket_7(sss)
             }
         break
         }
@@ -181,9 +181,9 @@ switch (event)
     case network_type_data:
         {
         buffer = ds_map_find_value(async_load,"buffer")
-        socket = ds_map_find_value(async_load,"id")
+        sss = ds_map_find_value(async_load,"id")
         buffer_seek(buffer,buffer_seek_start,0)
-        Packet_Get_Host(buffer,socket)
+        Packet_Get_Host(buffer,sss)
         break
         }
 //-----------------------------------//

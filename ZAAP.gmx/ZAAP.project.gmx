@@ -22,6 +22,7 @@
     <script>scripts\Socket_7.gml</script>
     <script>scripts\Packet_10.gml</script>
     <script>scripts\Packet_11.gml</script>
+    <script>scripts\Player_Move.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Host</object>

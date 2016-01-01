@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sock = -1
+            <string>sss = -1
 </string>
           </argument>
         </arguments>
@@ -48,10 +48,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(Client)
+            <string>//unnecesary check
+
+if instance_exists(Client)
     {
-    show_debug_message("test")
-    if sock == Client.client_sock
+    if sss == Client.sss
         {
         with Client
         Packet_10(other.x,other.y)
@@ -79,8 +80,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_sock
-y += 1
+            <string>Player_Move("down")
 </string>
           </argument>
         </arguments>
@@ -103,8 +103,7 @@ y += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_sock
-x += 1
+            <string>Player_Move("right")
 </string>
           </argument>
         </arguments>
@@ -127,8 +126,7 @@ x += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_sock
-y -= 1
+            <string>Player_Move("up")
 </string>
           </argument>
         </arguments>
@@ -151,8 +149,7 @@ y -= 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.client_sock
-x -= 1
+            <string>Player_Move("left")
 </string>
           </argument>
         </arguments>
@@ -207,7 +204,7 @@ if instance_exists(Client)
     draw_set_color(c_green)
     }
 else draw_set_color(c_red)
-draw_text(x,y+32,sock)
+draw_text(x,y+32,sss)
 
 
 if place_meeting(x,y,Player)

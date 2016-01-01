@@ -12,11 +12,11 @@ switch(packet)
 //-----------------------------------------//
     case 4:
         {//client spawn
-        client_sock = buffer_read(buff,buffer_u8)
+        sss = buffer_read(buff,buffer_u8)
 
         var pal = instance_create(128,128,Player)
-        ds_map_add(players,client_sock,pal)
-        pal.sock = client_sock
+        ds_map_add(players,sss,pal)
+        pal.sss = sss
         break
         }
 //-----------------------------------------//
@@ -25,43 +25,46 @@ switch(packet)
         var num = buffer_read(buff,buffer_u8)
         repeat (num -1)
             {
-            var socks = buffer_read(buff,buffer_u8)
+            var get_sss = buffer_read(buff,buffer_u8)
             var plax = buffer_read(buff,buffer_s32)
             var play = buffer_read(buff,buffer_s32)
             
             var pal = instance_create(plax,play,Player)
-            ds_map_add(players,socks,pal)
-            (pal).sock = socks
+            ds_map_add(players,get_sss,pal)
+            (pal).sss = get_sss
             }
-        break
-        }//-----------------------------------------//
-    case 6:
-        {
-        var socks = buffer_read(buff,buffer_u8)
-        var pal = instance_create(128,128,Player)
-        ds_map_add(players,socks,pal)
-        (pal).sock = socks
         break
         }
 //-----------------------------------------//
-/*    
-    case 10:
+    case 6:
         {
-        x = buffer_read(buffer,buffer_s16)
-        y = buffer_read(buffer,buffer_s16)
+        var get_sss = buffer_read(buff,buffer_u8)
+        var pal = instance_create(128,128,Player)
+        ds_map_add(players,get_sss,pal)
+        (pal).sss = get_sss
         break
         }
-*/
+//-----------------------------------------//
+    case 7:
+        {
+        var get_sss = buffer_read(buff,buffer_u8)
+        var pal = ds_map_find_value(players,sss)
+        with pal instance_destroy()
+        ds_map_delete(players,get_sss)
+        break
+        }
+//-----------------------------------------//
+
     case 11:
         {
-        var plsocket = buffer_read(buff,buffer_u8)
+        var get_sss = buffer_read(buff,buffer_u8)
         var plax = buffer_read(buff,buffer_s32)
         var play = buffer_read(buff,buffer_s32)
-        var player_temp = ds_map_find_value(players,plsocket)
+        var player_temp = ds_map_find_value(players,get_sss)
         show_debug_message(string(player_temp))
         if !is_undefined(player_temp)
             {
-            show_debug_message("updating player " + string(plsocket))
+            show_debug_message("updating player " + string(get_sss))
             (player_temp).x = (plax)
             (player_temp).y = (play)
             }

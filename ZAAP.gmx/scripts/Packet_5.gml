@@ -1,7 +1,7 @@
-//send newly connected socket all previous sockets
+//send newly connected Server Side Socket to all previous sockets
 show_debug_message("Sending Packet 5")
 
-var socket = argument0
+var sss = argument0
 var plax = 0
 var play = 0
 var num = ds_list_size(playerlist)
@@ -15,7 +15,7 @@ repeat num
     {
     var get_player = ds_list_find_value(playerlist,i)
     (i) += 1
-    if get_player != socket
+    if get_player != sss
         {
         var player_obj = ds_map_find_value(playerobjects,get_player)
         var plax = player_obj.x
@@ -26,11 +26,11 @@ repeat num
         }
     }
 show_debug_message("Packet 5")
-show_debug_message("Sending to socket " + string(socket))
+show_debug_message("Sending to Server Side Socket " + string(sss))
 show_debug_message("Num")
 show_debug_message(string(get_player))
 show_debug_message(string(plax))
 show_debug_message(string(play))
 
-network_send_packet(socket,buffer_host,buffer_tell(buffer_host))
+network_send_packet(sss,buffer_host,buffer_tell(buffer_host))
 
