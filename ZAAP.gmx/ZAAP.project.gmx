@@ -23,13 +23,10 @@
     <script>scripts\Packet_10.gml</script>
     <script>scripts\Packet_11.gml</script>
     <script>scripts\Player_Move.gml</script>
-<<<<<<< HEAD
     <script>scripts\Packet_21.gml</script>
     <script>scripts\Packet_22.gml</script>
     <script>scripts\buffer_reset.gml</script>
     <script>scripts\buffer_write_packet.gml</script>
-=======
->>>>>>> refs/remotes/origin/Changes
   </scripts>
   <objects name="objects">
     <object>objects\Host</object>
