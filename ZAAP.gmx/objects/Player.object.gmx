@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <string>sss = -1
 say = "Test"
 ptext = ""
@@ -33,6 +34,9 @@ saytimer = string_length(say)*60
 =======
             <string>sock = -1
 >>>>>>> origin/master
+=======
+            <string>sss = -1
+>>>>>>> refs/remotes/origin/Changes
 </string>
           </argument>
         </arguments>
@@ -56,6 +60,7 @@ saytimer = string_length(say)*60
           <argument>
             <kind>1</kind>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <string>//unnecesary check
 
 if instance_exists(Client)
@@ -70,9 +75,13 @@ if instance_exists(Client)
         
 =======
             <string>if instance_exists(Client)
+=======
+            <string>//unnecesary check
+
+if instance_exists(Client)
+>>>>>>> refs/remotes/origin/Changes
     {
-    show_debug_message("test")
-    if sock == Client.client_sock
+    if sss == Client.sss
         {
 >>>>>>> origin/master
         with Client
@@ -106,11 +115,15 @@ if instance_exists(Client)
           <argument>
             <kind>1</kind>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <string>Player_Move("down")
 =======
             <string>if sock == Client.client_sock
 y += 1
 >>>>>>> origin/master
+=======
+            <string>Player_Move("down")
+>>>>>>> refs/remotes/origin/Changes
 </string>
           </argument>
         </arguments>
@@ -134,11 +147,15 @@ y += 1
           <argument>
             <kind>1</kind>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <string>Player_Move("right")
 =======
             <string>if sock == Client.client_sock
 x += 1
 >>>>>>> origin/master
+=======
+            <string>Player_Move("right")
+>>>>>>> refs/remotes/origin/Changes
 </string>
           </argument>
         </arguments>
@@ -162,11 +179,15 @@ x += 1
           <argument>
             <kind>1</kind>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <string>Player_Move("up")
 =======
             <string>if sock == Client.client_sock
 y -= 1
 >>>>>>> origin/master
+=======
+            <string>Player_Move("up")
+>>>>>>> refs/remotes/origin/Changes
 </string>
           </argument>
         </arguments>
@@ -189,6 +210,7 @@ y -= 1
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <string>Player_Move("left")
 </string>
@@ -219,6 +241,9 @@ y = mouse_y
             <string>if sock == Client.client_sock
 x -= 1
 >>>>>>> origin/master
+=======
+            <string>Player_Move("left")
+>>>>>>> refs/remotes/origin/Changes
 </string>
           </argument>
         </arguments>
@@ -295,10 +320,14 @@ if instance_exists(Client)
     }
 else draw_set_color(c_red)
 <<<<<<< HEAD
+<<<<<<< HEAD
 draw_text(x,y+32,"Player " + string(sss))
 =======
 draw_text(x,y+32,sock)
 >>>>>>> origin/master
+=======
+draw_text(x,y+32,sss)
+>>>>>>> refs/remotes/origin/Changes
 
 
 if place_meeting(x,y,Player)

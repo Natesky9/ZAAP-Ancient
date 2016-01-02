@@ -145,10 +145,14 @@ repeat 3
             <kind>1</kind>
             <string>var event = ds_map_find_value(async_load,"type")
 <<<<<<< HEAD
+<<<<<<< HEAD
 var buffer,sss,player
 =======
 var buffer,socket,player
 >>>>>>> origin/master
+=======
+var buffer,sss,player
+>>>>>>> refs/remotes/origin/Changes
 switch (event)
     {
 //-----------------------------------//
@@ -157,6 +161,7 @@ switch (event)
         sss = ds_map_find_value(async_load,"socket")
         ds_list_add(playerlist,sss)
         player = instance_create(64,64,Player)
+<<<<<<< HEAD
 <<<<<<< HEAD
         player.sss = sss
         ds_map_add(playerobjects,sss,player)
@@ -172,11 +177,20 @@ switch (event)
         Packet_5(socket)
         Packet_6(socket)
 >>>>>>> origin/master
+=======
+        player.sock = sss
+        ds_map_add(playerobjects,sss,player)
+        
+        Packet_4(sss)
+        Packet_5(sss)
+        Packet_6(sss)
+>>>>>>> refs/remotes/origin/Changes
         break
         }
 //-----------------------------------//
     case network_type_disconnect:
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
         sss = ds_map_find_value(async_load,"socket")
         var findsocket = ds_list_find_index(playerlist,sss)
@@ -197,6 +211,18 @@ switch (event)
             ds_map_delete(playerobjects,socket)
             Socket_7(socket)
 >>>>>>> origin/master
+=======
+        sss = ds_map_find_value(async_load,"socket")
+        var findsocket = ds_list_find_index(playerlist,sss)
+        
+        if findsocket &gt;= 0
+            {
+            with (ds_map_find_value(playerobjects,sss))
+            instance_destroy()
+            ds_list_delete(playerlist,findsocket)
+            ds_map_delete(playerobjects,sss)
+            Socket_7(sss)
+>>>>>>> refs/remotes/origin/Changes
             }
         break
         }
@@ -205,10 +231,14 @@ switch (event)
         {
         buffer = ds_map_find_value(async_load,"buffer")
 <<<<<<< HEAD
+<<<<<<< HEAD
         sss = ds_map_find_value(async_load,"id")
 =======
         socket = ds_map_find_value(async_load,"id")
 >>>>>>> origin/master
+=======
+        sss = ds_map_find_value(async_load,"id")
+>>>>>>> refs/remotes/origin/Changes
         buffer_seek(buffer,buffer_seek_start,0)
         Packet_Get_Host(buffer,sss)
         break

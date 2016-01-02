@@ -1,5 +1,8 @@
 show_debug_message("Socket " + string(argument0) + " disconnected")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> refs/remotes/origin/Changes
 
 //send all players the disconnected socket
 show_debug_message("Sending Packet 7")
@@ -17,5 +20,8 @@ for (i = 0;i < ds_list_size(playerlist);i += 1)
     }
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> refs/remotes/origin/Changes
