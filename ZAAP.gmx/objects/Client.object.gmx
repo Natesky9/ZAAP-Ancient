@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>socket = network_create_socket(network_socket_tcp)
+            <string>sss = -1
+
+client_socket = network_create_socket(network_socket_tcp)
+
 //network_set_config(network_config_connect_timeout,100)
 //network_set_timeout(socket,100,100)
 
@@ -60,7 +63,7 @@ ii = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(socket)
+            <string>network_destroy(client_socket)
 buffer_delete(buffer_client)
 </string>
           </argument>
@@ -86,10 +89,10 @@ buffer_delete(buffer_client)
             <kind>1</kind>
             <string>if (connected &gt;= 0) &amp;&amp; current_time mod 12 = 0
     {
-    buffer_seek(buffer_client,buffer_seek_start,0);
+    buffer_reset(buffer_client);
     buffer_write(buffer_client,buffer_u8,1);
     buffer_write(buffer_client,buffer_u32,current_time);
-    network_send_packet(socket,buffer_client,buffer_tell(buffer_client));
+    network_send_packet(client_socket,buffer_client,buffer_tell(buffer_client));
     }
 
 </string>
@@ -114,7 +117,7 @@ buffer_delete(buffer_client)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(socket)
+            <string>network_destroy(client_socket)
 
 </string>
           </argument>
@@ -138,8 +141,9 @@ buffer_delete(buffer_client)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-connected = network_connect(socket,"127.0.0.1",2244)
+            <string>ip = get_string("Enter the ip to connect to","127.0.0.1")
+if connected &lt; 0
+connected = network_connect(client_socket,ip,2244)
 </string>
           </argument>
         </arguments>
@@ -198,7 +202,7 @@ switch (event)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if connected &gt; 0
+            <string>if connected &gt;= 0
 sprite_index = sprite3
 else
 sprite_index = sprite2
@@ -206,10 +210,39 @@ sprite_index = sprite2
 draw_sprite(sprite_index,0,x,y)
 draw_set_halign(fa_right)
 draw_text(room_width,0+32,"Connected: " + string(connected &gt;= 0))
-draw_text(room_width,48,socket)
+//draw_text(room_width,48,socket)
 draw_text(room_width,y+64,"Packets: " + string(ping))
 
 draw_text(room_width,y + 128,current_time)
+draw_set_valign(fa_bottom)
+
+draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ptext = keyboard_string
+keyboard_string = ""
+Packet_21(ptext)
+
 </string>
           </argument>
         </arguments>

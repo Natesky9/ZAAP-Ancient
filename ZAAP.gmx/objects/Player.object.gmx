@@ -8,6 +8,32 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>sss = -1
+say = "Test"
+ptext = ""
+saytimer = string_length(say)*60
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -25,8 +51,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with Client
-Move(other.id)
+            <string>//unnecesary check
+
+if instance_exists(Client)
+    {
+    if sss == Client.sss
+        {
+        ptext = keyboard_string
+        if saytimer &gt;0
+    saytimer -= 1
+    else
+    saytimer = 0
+        
+        with Client
+        Packet_10(other.x,other.y)
+        }
+    }
+
 </string>
           </argument>
         </arguments>
@@ -49,8 +90,7 @@ Move(other.id)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
-y += 1
+            <string>Player_Move("down")
 </string>
           </argument>
         </arguments>
@@ -73,8 +113,7 @@ y += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
-x += 1
+            <string>Player_Move("right")
 </string>
           </argument>
         </arguments>
@@ -97,8 +136,7 @@ x += 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
-y -= 1
+            <string>Player_Move("up")
 </string>
           </argument>
         </arguments>
@@ -121,8 +159,31 @@ y -= 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if sock == Client.sock
-x -= 1
+            <string>Player_Move("left")
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>x = mouse_x
+y = mouse_y
 </string>
           </argument>
         </arguments>
@@ -145,10 +206,38 @@ x -= 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(apple,0,x,y)
+            <string>//draw the player's text
+if saytimer &gt;0 &amp;&amp; ptext == ""
+    {
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_bottom)
+    draw_set_color(c_white)
+    draw_roundrect(x-string_width(say)/2-4,y-32-string_height(say)-4,
+                x+string_width(say)/2+4,y-32+4,false)
+    draw_set_color(c_blue)
+    draw_text(x,y-32,say)
+    }
+if ptext != ""
+    {
+    draw_set_color(c_green)
+    draw_text(x,y-32,ptext)
+    }
+
+draw_set_halign(fa_center)
+draw_set_valign(fa_top)
+draw_sprite(apple,0,x,y)
 if instance_exists(Client)
     {
-    draw_text(x,y+32,sock)
+    draw_set_color(c_green)
+    }
+else draw_set_color(c_red)
+draw_text(x,y+32,"Player " + string(sss))
+
+
+if place_meeting(x,y,Player)
+    {
+    draw_set_color(c_red)
+    draw_circle(x,y,16,true)
     }
 </string>
           </argument>
