@@ -1,3 +1,5 @@
+//object create script
+
 var sss = argument0
 show_debug_message("Server Side Socket " + string(sss) + " connected")
     buffer_seek(buffer_host,buffer_seek_start,0);

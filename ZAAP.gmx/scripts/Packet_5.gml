@@ -20,7 +20,6 @@ repeat num
         var player_obj = ds_map_find_value(playerobjects,get_player)
         var plax = player_obj.x
         var play = player_obj.y
-        buffer_write(buffer_host,buffer_u8,get_player)
         buffer_write(buffer_host,buffer_s32,plax)
         buffer_write(buffer_host,buffer_s32,play)
         }

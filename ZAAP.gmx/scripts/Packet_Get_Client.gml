@@ -11,9 +11,8 @@ switch(packet)
         }
 //-----------------------------------------//
     case 4:
-        {//client spawn
+        {//client spawn object
         sss = buffer_read(buff,buffer_u8)
-
         var pal = instance_create(128,128,Player)
         ds_map_add(players,sss,pal)
         pal.sss = sss
@@ -52,6 +51,28 @@ switch(packet)
         with pal instance_destroy()
         ds_map_delete(players,get_sss)
         break
+        }
+//-----------------------------------------//
+    case 8:
+        {
+        show_debug_message("firing!")
+        var objx = buffer_read(buffer_client,buffer_s32)
+        var objy = buffer_read(buffer_client,buffer_s32)
+        var dir = buffer_read(buffer_client,buffer_f32)
+        var spd = buffer_read(buffer_client,buffer_f32)
+        var sock = buffer_read(buffer_client,buffer_u8)
+        var obj = buffer_read(buffer_client,buffer_string)
+        show_debug_message(string(obj))
+        if obj == "fire"
+            {
+            show_debug_message("firing complete")
+            show_debug_message("creating at :" + string(objx) + "," + string(objy))
+            new_obj = instance_create(objx,objy,fire)
+            new_obj.direction = dir
+            new_obj.speed = spd
+            new_obj.sss = sock
+            }
+       break
         }
 //-----------------------------------------//
 

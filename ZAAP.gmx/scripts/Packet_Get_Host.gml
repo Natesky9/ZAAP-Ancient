@@ -14,6 +14,19 @@ switch(packet)
         network_send_packet(sss,buffer_host,buffer_tell(buffer_host));
         break;
         }
+    case 8:
+        {
+        show_debug_message("Packet 8")
+        var objx = buffer_read(buffer_host,buffer_s32)
+        var objy = buffer_read(buffer_host,buffer_s32)
+        var dir = buffer_read(buffer_host,buffer_f32)
+        var spd = buffer_read(buffer_host,buffer_f32)
+        var obj = buffer_read(buffer_host,buffer_string)
+        show_debug_message("Host recieved")
+        show_debug_message(string(obj))
+        Packet_8(objx,objy,dir,spd,packet,obj)
+        break
+        }
     case 10:
         {
         var player = ds_map_find_value(playerobjects,sss)
