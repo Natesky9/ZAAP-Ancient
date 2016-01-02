@@ -144,7 +144,11 @@ repeat 3
           <argument>
             <kind>1</kind>
             <string>var event = ds_map_find_value(async_load,"type")
+<<<<<<< HEAD
 var buffer,sss,player
+=======
+var buffer,socket,player
+>>>>>>> origin/master
 switch (event)
     {
 //-----------------------------------//
@@ -153,19 +157,33 @@ switch (event)
         sss = ds_map_find_value(async_load,"socket")
         ds_list_add(playerlist,sss)
         player = instance_create(64,64,Player)
+<<<<<<< HEAD
         player.sss = sss
         ds_map_add(playerobjects,sss,player)
         
         Packet_4(sss)
         Packet_5(sss)
         Packet_6(sss)
+=======
+        player.sock = socket
+        ds_map_add(playerobjects,socket,player)
+        
+        Packet_4(socket)
+        Packet_5(socket)
+        Packet_6(socket)
+>>>>>>> origin/master
         break
         }
 //-----------------------------------//
     case network_type_disconnect:
         {
+<<<<<<< HEAD
         sss = ds_map_find_value(async_load,"socket")
         var findsocket = ds_list_find_index(playerlist,sss)
+=======
+        socket = ds_map_find_value(async_load,"socket")
+        var findsocket = ds_list_find_index(playerlist,socket)
+>>>>>>> origin/master
         
         if findsocket &gt;= 0
             {
@@ -173,7 +191,12 @@ switch (event)
             with (ds_map_find_value(playerobjects,sss))
             instance_destroy()
             ds_list_delete(playerlist,findsocket)
+<<<<<<< HEAD
             ds_map_delete(playerobjects,sss)
+=======
+            ds_map_delete(playerobjects,socket)
+            Socket_7(socket)
+>>>>>>> origin/master
             }
         break
         }
@@ -181,7 +204,11 @@ switch (event)
     case network_type_data:
         {
         buffer = ds_map_find_value(async_load,"buffer")
+<<<<<<< HEAD
         sss = ds_map_find_value(async_load,"id")
+=======
+        socket = ds_map_find_value(async_load,"id")
+>>>>>>> origin/master
         buffer_seek(buffer,buffer_seek_start,0)
         Packet_Get_Host(buffer,sss)
         break

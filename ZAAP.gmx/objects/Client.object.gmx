@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
             <string>sss = -1
+=======
+            <string>client_sock = -1
+>>>>>>> origin/master
 
 client_socket = network_create_socket(network_socket_tcp)
 
@@ -141,9 +145,14 @@ buffer_delete(buffer_client)
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
             <string>ip = get_string("Enter the ip to connect to","127.0.0.1")
 if connected &lt; 0
 connected = network_connect(client_socket,ip,2244)
+=======
+            <string>
+connected = network_connect(client_socket,"127.0.0.1",2244)
+>>>>>>> origin/master
 </string>
           </argument>
         </arguments>
@@ -216,6 +225,7 @@ draw_text(room_width,y+64,"Packets: " + string(ping))
 draw_text(room_width,y + 128,current_time)
 draw_set_valign(fa_bottom)
 
+<<<<<<< HEAD
 draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
 </string>
           </argument>
@@ -243,6 +253,9 @@ draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
 keyboard_string = ""
 Packet_21(ptext)
 
+=======
+draw_text(room_width,room_height,"Client Socket: " + string(client_sock))
+>>>>>>> origin/master
 </string>
           </argument>
         </arguments>
