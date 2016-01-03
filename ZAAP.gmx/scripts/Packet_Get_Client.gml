@@ -14,6 +14,7 @@ switch(packet)
         {//client spawn object
         sss = buffer_read(buff,buffer_u8)
         var pal = instance_create(128,128,Player)
+        ds_list_add(playerlist,sss)
         ds_map_add(players,sss,pal)
         pal.sss = sss
         break
@@ -22,13 +23,14 @@ switch(packet)
     case 5:
         {
         var num = buffer_read(buff,buffer_u8)
-        repeat (num -1)
+        repeat (num)
             {
             var get_sss = buffer_read(buff,buffer_u8)
             var plax = buffer_read(buff,buffer_s32)
             var play = buffer_read(buff,buffer_s32)
             
             var pal = instance_create(plax,play,Player)
+            ds_list_add(playerlist,get_sss)
             ds_map_add(players,get_sss,pal)
             (pal).sss = get_sss
             }
@@ -39,6 +41,7 @@ switch(packet)
         {
         var get_sss = buffer_read(buff,buffer_u8)
         var pal = instance_create(128,128,Player)
+        ds_list_add(playerlist,get_sss)
         ds_map_add(players,get_sss,pal)
         (pal).sss = get_sss
         break
@@ -47,8 +50,9 @@ switch(packet)
     case 7:
         {
         var get_sss = buffer_read(buff,buffer_u8)
-        var pal = ds_map_find_value(players,sss)
+        var pal = ds_map_find_value(players,get_sss)
         with pal instance_destroy()
+        ds_list_delete(playerlist,get_sss)
         ds_map_delete(players,get_sss)
         break
         }

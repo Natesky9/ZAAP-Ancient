@@ -166,13 +166,13 @@ switch (event)
         {
         sss = ds_map_find_value(async_load,"socket")
         var findsocket = ds_list_find_index(playerlist,sss)
+        ds_list_delete(playerlist,findsocket)
         
         if findsocket &gt;= 0
             {
             Socket_7(sss)
             with (ds_map_find_value(playerobjects,sss))
             instance_destroy()
-            ds_list_delete(playerlist,findsocket)
             ds_map_delete(playerobjects,sss)
             }
         break
@@ -218,20 +218,15 @@ draw_text(0,16,"Total Clients: " + string(ds_list_size(playerlist)))
 
 draw_sprite(sprite1,0,x,y)
 
-var i = 0
-repeat 3
+for (i = 0;i &lt; ds_list_size(playerlist); i += 1)
     {
     var p = ds_list_find_value(playerlist,i)
     draw_text(0,64+16*i,"Player "+string(i)+": "+ string(p))
-    if !is_undefined(p)
-        {
-        var po = ds_map_find_value(playerobjects,p)
-        var px = po.x
-        var py = po.y
-        draw_set_color(c_white)
-        draw_line(64,64+16*i,px,py)
-        }
-    i += 1
+    var po = ds_map_find_value(playerobjects,p)
+    var px = po.x
+    var py = po.y
+    draw_set_color(c_white)
+    draw_line(64,64+16*i,px,py)
     }
 
 </string>

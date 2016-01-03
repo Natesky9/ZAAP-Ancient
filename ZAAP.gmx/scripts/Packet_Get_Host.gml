@@ -22,7 +22,7 @@ switch(packet)
         var objy = buffer_read(buffer,buffer_s32)
         var dir = buffer_read(buffer,buffer_f32)
         var spd = buffer_read(buffer,buffer_f32)
-        var sock = buffer_read(buffer,buffer_u8)
+        buffer_read(buffer,buffer_u8)
         var obj = buffer_read(buffer,buffer_u8)
         if obj == 2
             {
@@ -31,7 +31,7 @@ switch(packet)
             new_obj = instance_create(objx,objy,fire)
             new_obj.direction = dir
             new_obj.speed = spd
-            new_obj.sss = sock
+            new_obj.sss = sss
             }
         
         show_debug_message("Host recieved")
@@ -39,9 +39,8 @@ switch(packet)
         show_debug_message(string(objy))
         show_debug_message(string(dir))
         show_debug_message(string(spd))
-        show_debug_message(string(sock))
         show_debug_message(string(obj))
-        Packet_8(objx,objy,dir,spd,sock,obj)
+        Packet_8(objx,objy,dir,spd,sss,obj)
         break
         }
     case 10:

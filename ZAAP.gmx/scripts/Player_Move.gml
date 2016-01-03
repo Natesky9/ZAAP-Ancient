@@ -7,22 +7,22 @@ if sss == Client.sss
         {
         case "left":
             {
-            x -= 1
+            x -= 4
             break
             }
         case "right":
             {
-            x += 1
+            x += 4
             break
             }
         case "up":
             {
-            y -= 1
+            y -= 4
             break
             }
         case "down":
             {
-            y += 1
+            y += 4
             }
         }
     }

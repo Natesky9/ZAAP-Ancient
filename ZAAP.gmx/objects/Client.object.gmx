@@ -33,6 +33,7 @@ client_socket = network_create_socket(network_socket_tcp)
 //network_set_timeout(socket,100,100)
 
 buffer_client = buffer_create(1024,buffer_fixed,1)
+playerlist = ds_list_create()
 players = ds_map_create()
 
 result = 0
@@ -118,13 +119,48 @@ buffer_delete(buffer_client)
           <argument>
             <kind>1</kind>
             <string>//spawn a projectile
-var me = ds_map_find_value(players,sss)
-
-if me &gt; 0
+if !keyboard_check_pressed(vk_shift)
     {
-    var dir = point_direction(me.x,me.y,mouse_x,mouse_y)
-    //2 is a projectile
-    Packet_8(me.x,me.y,dir,5,0,2)
+    var me = ds_map_find_value(players,sss)
+    if me &gt; 0
+        {
+        var dir = point_direction(me.x,me.y,mouse_x,mouse_y)
+        //2 is a projectile
+        Packet_8(me.x,me.y,dir,5,0,2)
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="50">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//spawn a projectile
+if keyboard_check(vk_shift)
+    {
+    var me = ds_map_find_value(players,sss)
+    if me &gt; 0
+        {
+        var dir = point_direction(me.x,me.y,mouse_x,mouse_y)
+        //2 is a projectile
+        Packet_8(me.x,me.y,dir,5,0,2)
+        }
     }
 </string>
           </argument>
@@ -238,16 +274,20 @@ sprite_index = sprite3
 else
 sprite_index = sprite2
 
+draw_set_color(c_blue)
 draw_sprite(sprite_index,0,x,y)
+draw_set_valign(fa_top)
 draw_set_halign(fa_right)
-draw_text(room_width,0+32,"Connected: " + string(connected &gt;= 0))
-//draw_text(room_width,48,socket)
-draw_text(room_width,y+64,"Packets: " + string(ping))
+draw_text(room_width,0+64,"Connected: " + string(connected &gt;= 0))
+if keyboard_check(vk_shift)
+    {
+    draw_set_color(c_green)
+    draw_text(room_width,y+80,"Ping: " + string(ping))
+    draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
+    Draw_Players()
+    }
 
-draw_text(room_width,y + 128,current_time)
-draw_set_valign(fa_bottom)
 
-draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
 </string>
           </argument>
         </arguments>

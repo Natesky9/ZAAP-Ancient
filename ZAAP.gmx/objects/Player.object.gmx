@@ -214,13 +214,18 @@ if saytimer &gt;0 &amp;&amp; ptext == ""
     draw_set_color(c_white)
     draw_roundrect(x-string_width(say)/2-4,y-32-string_height(say)-4,
                 x+string_width(say)/2+4,y-32+4,false)
+    draw_set_color(c_black)
+    draw_roundrect(x-string_width(say)/2-4,y-32-string_height(say)-4,
+                x+string_width(say)/2+4,y-32+4,true)
     draw_set_color(c_blue)
     draw_text(x,y-32,say)
     }
 if ptext != ""
     {
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_bottom)
     draw_set_color(c_green)
-    draw_text(x,y-32,ptext)
+    draw_text(x,y-32-4,ptext)
     }
 
 draw_set_halign(fa_center)

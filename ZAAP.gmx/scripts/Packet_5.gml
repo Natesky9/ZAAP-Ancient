@@ -9,7 +9,7 @@ var i = 0
 
 buffer_seek(buffer_host,buffer_seek_start,0)
 buffer_write(buffer_host,buffer_u8,5)
-buffer_write(buffer_host,buffer_u8,num)
+buffer_write(buffer_host,buffer_u8,num-1)
 
 repeat num
     {
@@ -20,6 +20,8 @@ repeat num
         var player_obj = ds_map_find_value(playerobjects,get_player)
         var plax = player_obj.x
         var play = player_obj.y
+        
+        buffer_write(buffer_host,buffer_u8,get_player)
         buffer_write(buffer_host,buffer_s32,plax)
         buffer_write(buffer_host,buffer_s32,play)
         }
@@ -32,4 +34,3 @@ show_debug_message(string(plax))
 show_debug_message(string(play))
 
 network_send_packet(sss,buffer_host,buffer_tell(buffer_host))
-
