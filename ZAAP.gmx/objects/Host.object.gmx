@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>server = -1
-buffer_host = buffer_create(1024,buffer_fixed,1)
+bbb = buffer_create(1024,buffer_fixed,1)
 playerlist = ds_list_create()
 playerobjects = ds_map_create()
 </string>
@@ -51,30 +51,8 @@ playerobjects = ds_map_create()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_black)
-draw_set_halign(fa_left)
-draw_set_valign(fa_top)
-draw_text(0,0,"Server Status: " + string(server &gt;= 0))
-draw_text(0,16,"Total Clients: " + string(ds_list_size(playerlist)))
-
-draw_sprite(sprite1,0,x,y)
-
-var i = 0
-repeat 3
-    {
-    var p = ds_list_find_value(playerlist,i)
-    draw_text(0,64+16*i,"Player "+string(i)+": "+ string(p))
-    if !is_undefined(p)
-        {
-        var po = ds_map_find_value(playerobjects,p)
-        var px = po.x
-        var py = po.y
-        draw_set_color(c_white)
-        draw_line(64,64+16*i,px,py)
-        }
-    i += 1
-    }
-
+            <string>buffer_delete(bbb)
+network_destroy(server)
 </string>
           </argument>
         </arguments>
@@ -144,7 +122,7 @@ repeat 3
           <argument>
             <kind>1</kind>
             <string>var event = ds_map_find_value(async_load,"type")
-var buffer,sss,player
+var bbb,sss,player
 switch (event)
     {
 //-----------------------------------//
@@ -180,10 +158,10 @@ switch (event)
 //-----------------------------------//
     case network_type_data:
         {
-        buffer = ds_map_find_value(async_load,"buffer")
+        bbb = ds_map_find_value(async_load,"buffer")
         sss = ds_map_find_value(async_load,"id")
-        buffer_seek(buffer,buffer_seek_start,0)
-        Packet_Get_Host(buffer,sss)
+        buffer_reset()
+        Packet_Get_Host(bbb,sss)
         break
         }
 //-----------------------------------//
@@ -228,7 +206,6 @@ for (i = 0;i &lt; ds_list_size(playerlist); i += 1)
     draw_set_color(c_white)
     draw_line(64,64+16*i,px,py)
     }
-
 </string>
           </argument>
         </arguments>

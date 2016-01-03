@@ -7,9 +7,9 @@ var play = 0
 var num = ds_list_size(playerlist)
 var i = 0
 
-buffer_seek(buffer_host,buffer_seek_start,0)
-buffer_write(buffer_host,buffer_u8,5)
-buffer_write(buffer_host,buffer_u8,num-1)
+buffer_seek(bbb,buffer_seek_start,0)
+buffer_write(bbb,buffer_u8,5)
+buffer_write(bbb,buffer_u8,num-1)
 
 repeat num
     {
@@ -21,9 +21,9 @@ repeat num
         var plax = player_obj.x
         var play = player_obj.y
         
-        buffer_write(buffer_host,buffer_u8,get_player)
-        buffer_write(buffer_host,buffer_s32,plax)
-        buffer_write(buffer_host,buffer_s32,play)
+        buffer_write(bbb,buffer_u8,get_player)
+        buffer_write(bbb,buffer_s32,plax)
+        buffer_write(bbb,buffer_s32,play)
         }
     }
 show_debug_message("Packet 5")
@@ -33,4 +33,4 @@ show_debug_message(string(get_player))
 show_debug_message(string(plax))
 show_debug_message(string(play))
 
-network_send_packet(sss,buffer_host,buffer_tell(buffer_host))
+network_send_packet(sss,bbb,buffer_tell(bbb))

@@ -25,8 +25,8 @@
       <script>scripts\Packet_8.gml</script>
       <script>scripts\Packet_10.gml</script>
       <script>scripts\Packet_11.gml</script>
-      <script>scripts\Packet_22.gml</script>
       <script>scripts\Packet_21.gml</script>
+      <script>scripts\Packet_22.gml</script>
     </scripts>
     <script>scripts\buffer_reset.gml</script>
     <script>scripts\buffer_write_packet.gml</script>

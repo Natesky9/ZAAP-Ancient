@@ -64,7 +64,9 @@ if instance_exists(Client)
     saytimer = 0
         
         with Client
-        Packet_10(other.x,other.y)
+            {
+            Packet_10(other.x,other.y)
+            }
         }
     }
 

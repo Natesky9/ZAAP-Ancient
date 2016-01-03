@@ -1,29 +1,29 @@
-var buffer = argument0
+bbb = argument0
 var sss = argument1
-var packet = buffer_read(buffer,buffer_u8)
+var packet = buffer_read(bbb,buffer_u8)
 
 switch(packet)
     {
     case 1:
         {
-        var t = buffer_read(buffer,buffer_u32);
-        buffer_seek(buffer_host,buffer_seek_start,0);
+        var t = buffer_read(bbb,buffer_u32);
+        buffer_seek(bbb,buffer_seek_start,0);
         //packet type
-        buffer_write(buffer_host,buffer_u8,1);
-        buffer_write(buffer_host,buffer_u32,t);
-        network_send_packet(sss,buffer_host,buffer_tell(buffer_host));
+        buffer_write(bbb,buffer_u8,1);
+        buffer_write(bbb,buffer_u32,t);
+        network_send_packet(sss,bbb,buffer_tell(bbb));
         break;
         }
     case 8:
         {
         show_debug_message("Packet 8")
         
-        var objx = buffer_read(buffer,buffer_s32)
-        var objy = buffer_read(buffer,buffer_s32)
-        var dir = buffer_read(buffer,buffer_f32)
-        var spd = buffer_read(buffer,buffer_f32)
-        buffer_read(buffer,buffer_u8)
-        var obj = buffer_read(buffer,buffer_u8)
+        var objx = buffer_read(bbb,buffer_s32)
+        var objy = buffer_read(bbb,buffer_s32)
+        var dir = buffer_read(bbb,buffer_f32)
+        var spd = buffer_read(bbb,buffer_f32)
+        buffer_read(bbb,buffer_u8)
+        var obj = buffer_read(bbb,buffer_u8)
         if obj == 2
             {
             show_debug_message("firing complete")
@@ -46,8 +46,8 @@ switch(packet)
     case 10:
         {
         var player = ds_map_find_value(playerobjects,sss)
-        var plax = buffer_read(buffer,buffer_s32)
-        var play = buffer_read(buffer,buffer_s32)
+        var plax = buffer_read(bbb,buffer_s32)
+        var play = buffer_read(bbb,buffer_s32)
         (player).x = (plax)
         (player).y = (play)
         Packet_11(sss,plax,play)
@@ -55,7 +55,7 @@ switch(packet)
         }
     case 21:
         {
-        var psay = buffer_read(buffer,buffer_string)
+        var psay = buffer_read(bbb,buffer_string)
         show_debug_message("say")
         Packet_22(sss,psay)
         break

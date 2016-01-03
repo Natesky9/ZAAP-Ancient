@@ -1,18 +1,18 @@
-var buff = argument[0];
-var packet = buffer_read(buff,buffer_u8);
+bbb = argument0;
+var packet = buffer_read(bbb,buffer_u8);
 
 switch(packet)
     {
     case 1:
         {
-        var time = buffer_read(buff,buffer_u32);
+        var time = buffer_read(bbb,buffer_u32);
         ping = current_time - time;
         break;
         }
 //-----------------------------------------//
     case 4:
         {//client spawn object
-        sss = buffer_read(buff,buffer_u8)
+        sss = buffer_read(bbb,buffer_u8)
         var pal = instance_create(128,128,Player)
         ds_list_add(playerlist,sss)
         ds_map_add(players,sss,pal)
@@ -22,12 +22,12 @@ switch(packet)
 //-----------------------------------------//
     case 5:
         {
-        var num = buffer_read(buff,buffer_u8)
+        var num = buffer_read(bbb,buffer_u8)
         repeat (num)
             {
-            var get_sss = buffer_read(buff,buffer_u8)
-            var plax = buffer_read(buff,buffer_s32)
-            var play = buffer_read(buff,buffer_s32)
+            var get_sss = buffer_read(bbb,buffer_u8)
+            var plax = buffer_read(bbb,buffer_s32)
+            var play = buffer_read(bbb,buffer_s32)
             
             var pal = instance_create(plax,play,Player)
             ds_list_add(playerlist,get_sss)
@@ -39,7 +39,7 @@ switch(packet)
 //-----------------------------------------//
     case 6:
         {
-        var get_sss = buffer_read(buff,buffer_u8)
+        var get_sss = buffer_read(bbb,buffer_u8)
         var pal = instance_create(128,128,Player)
         ds_list_add(playerlist,get_sss)
         ds_map_add(players,get_sss,pal)
@@ -49,7 +49,7 @@ switch(packet)
 //-----------------------------------------//
     case 7:
         {
-        var get_sss = buffer_read(buff,buffer_u8)
+        var get_sss = buffer_read(bbb,buffer_u8)
         var pal = ds_map_find_value(players,get_sss)
         with pal instance_destroy()
         ds_list_delete(playerlist,get_sss)
@@ -59,12 +59,12 @@ switch(packet)
 //-----------------------------------------//
     case 8:
         {
-        var objx = buffer_read(buff,buffer_s32)
-        var objy = buffer_read(buff,buffer_s32)
-        var dir = buffer_read(buff,buffer_f32)
-        var spd = buffer_read(buff,buffer_f32)
-        var sock = buffer_read(buff,buffer_u8)
-        var obj = buffer_read(buff,buffer_u8)
+        var objx = buffer_read(bbb,buffer_s32)
+        var objy = buffer_read(bbb,buffer_s32)
+        var dir = buffer_read(bbb,buffer_f32)
+        var spd = buffer_read(bbb,buffer_f32)
+        var sock = buffer_read(bbb,buffer_u8)
+        var obj = buffer_read(bbb,buffer_u8)
         
         show_debug_message("Client recieved")
         show_debug_message(string(objx))
@@ -91,9 +91,9 @@ switch(packet)
 
     case 11:
         {
-        var get_sss = buffer_read(buff,buffer_u8)
-        var plax = buffer_read(buff,buffer_s32)
-        var play = buffer_read(buff,buffer_s32)
+        var get_sss = buffer_read(bbb,buffer_u8)
+        var plax = buffer_read(bbb,buffer_s32)
+        var play = buffer_read(bbb,buffer_s32)
         var player_temp = ds_map_find_value(players,get_sss)
         if !is_undefined(player_temp)
             {
@@ -104,9 +104,9 @@ switch(packet)
         }
     case 22:
         {
-        var get_sss = buffer_read(buff,buffer_u8)
+        var get_sss = buffer_read(bbb,buffer_u8)
         var pal = ds_map_find_value(players,get_sss)
-        var get_say = buffer_read(buff,buffer_string)
+        var get_say = buffer_read(bbb,buffer_string)
         (pal).say = (get_say)
         (pal).saytimer = string_length(get_say)*60
         }
