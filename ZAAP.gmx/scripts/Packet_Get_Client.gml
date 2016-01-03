@@ -11,40 +11,8 @@ switch(packet)
         }
 //-----------------------------------------//
     case 4:
-        {//client spawn
-<<<<<<< HEAD
-<<<<<<< HEAD
+        {//client spawn object
         sss = buffer_read(buff,buffer_u8)
-
-        var pal = instance_create(128,128,Player)
-        ds_map_add(players,sss,pal)
-        pal.sss = sss
-        break
-        }
-//-----------------------------------------//
-    case 5:
-        {
-        var num = buffer_read(buff,buffer_u8)
-        repeat (num -1)
-            {
-            var get_sss = buffer_read(buff,buffer_u8)
-            var plax = buffer_read(buff,buffer_s32)
-            var play = buffer_read(buff,buffer_s32)
-            
-            var pal = instance_create(plax,play,Player)
-            ds_map_add(players,get_sss,pal)
-            (pal).sss = get_sss
-            }
-        break
-        }
-//-----------------------------------------//
-    case 6:
-=======
-        client_sock = buffer_read(buff,buffer_u8)
-=======
-        sss = buffer_read(buff,buffer_u8)
->>>>>>> refs/remotes/origin/Changes
-
         var pal = instance_create(128,128,Player)
         ds_map_add(players,sss,pal)
         pal.sss = sss
@@ -76,20 +44,6 @@ switch(packet)
         break
         }
 //-----------------------------------------//
-<<<<<<< HEAD
-/*    
-    case 10:
->>>>>>> origin/master
-        {
-        var get_sss = buffer_read(buff,buffer_u8)
-        var pal = instance_create(128,128,Player)
-        ds_map_add(players,get_sss,pal)
-        (pal).sss = get_sss
-        break
-        }
-//-----------------------------------------//
-=======
->>>>>>> refs/remotes/origin/Changes
     case 7:
         {
         var get_sss = buffer_read(buff,buffer_u8)
@@ -99,40 +53,51 @@ switch(packet)
         break
         }
 //-----------------------------------------//
+    case 8:
+        {
+        var objx = buffer_read(buff,buffer_s32)
+        var objy = buffer_read(buff,buffer_s32)
+        var dir = buffer_read(buff,buffer_f32)
+        var spd = buffer_read(buff,buffer_f32)
+        var sock = buffer_read(buff,buffer_u8)
+        var obj = buffer_read(buff,buffer_u8)
+        
+        show_debug_message("Client recieved")
+        show_debug_message(string(objx))
+        show_debug_message(string(objy))
+        show_debug_message(string(dir))
+        show_debug_message(string(spd))
+        show_debug_message(string(sock))
+        show_debug_message(string(obj))
+        show_debug_message("End Client revieve")
+        
+        
+        if obj == 2
+            {
+            show_debug_message("firing complete")
+            show_debug_message("creating at :" + string(objx) + "," + string(objy))
+            new_obj = instance_create(objx,objy,fire)
+            new_obj.direction = dir
+            new_obj.speed = spd
+            new_obj.sss = sock
+            }
+       break
+        }
+//-----------------------------------------//
 
     case 11:
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
         var get_sss = buffer_read(buff,buffer_u8)
         var plax = buffer_read(buff,buffer_s32)
         var play = buffer_read(buff,buffer_s32)
         var player_temp = ds_map_find_value(players,get_sss)
         if !is_undefined(player_temp)
             {
-=======
-        var plsocket = buffer_read(buff,buffer_u8)
-=======
-        var get_sss = buffer_read(buff,buffer_u8)
->>>>>>> refs/remotes/origin/Changes
-        var plax = buffer_read(buff,buffer_s32)
-        var play = buffer_read(buff,buffer_s32)
-        var player_temp = ds_map_find_value(players,get_sss)
-        show_debug_message(string(player_temp))
-        if !is_undefined(player_temp)
-            {
-<<<<<<< HEAD
-            show_debug_message("updating player " + string(plsocket))
->>>>>>> origin/master
-=======
-            show_debug_message("updating player " + string(get_sss))
->>>>>>> refs/remotes/origin/Changes
             (player_temp).x = (plax)
             (player_temp).y = (play)
             }
         break
         }
-<<<<<<< HEAD
     case 22:
         {
         var get_sss = buffer_read(buff,buffer_u8)
@@ -141,7 +106,5 @@ switch(packet)
         (pal).say = (get_say)
         (pal).saytimer = string_length(get_say)*60
         }
-=======
->>>>>>> origin/master
         break
     }

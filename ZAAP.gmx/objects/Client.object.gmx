@@ -25,15 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-<<<<<<< HEAD
-<<<<<<< HEAD
             <string>sss = -1
-=======
-            <string>client_sock = -1
->>>>>>> origin/master
-=======
-            <string>sss = -1
->>>>>>> refs/remotes/origin/Changes
 
 client_socket = network_create_socket(network_socket_tcp)
 
@@ -108,6 +100,37 @@ buffer_delete(buffer_client)
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//spawn a projectile
+var me = ds_map_find_value(players,sss)
+
+if me &gt; 0
+    {
+    var dir = point_direction(me.x,me.y,mouse_x,mouse_y)
+    //2 is a projectile
+    Packet_8(me.x,me.y,dir,5,0,2)
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="6" enumb="5">
       <action>
         <libid>1</libid>
@@ -149,20 +172,9 @@ buffer_delete(buffer_client)
         <arguments>
           <argument>
             <kind>1</kind>
-<<<<<<< HEAD
-<<<<<<< HEAD
             <string>ip = get_string("Enter the ip to connect to","127.0.0.1")
 if connected &lt; 0
 connected = network_connect(client_socket,ip,2244)
-=======
-            <string>
-connected = network_connect(client_socket,"127.0.0.1",2244)
->>>>>>> origin/master
-=======
-            <string>ip = get_string("Enter the ip to connect to","127.0.0.1")
-if connected &lt; 0
-connected = network_connect(client_socket,ip,2244)
->>>>>>> refs/remotes/origin/Changes
 </string>
           </argument>
         </arguments>
@@ -235,8 +247,6 @@ draw_text(room_width,y+64,"Packets: " + string(ping))
 draw_text(room_width,y + 128,current_time)
 draw_set_valign(fa_bottom)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
 </string>
           </argument>
@@ -264,12 +274,6 @@ draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
 keyboard_string = ""
 Packet_21(ptext)
 
-=======
-draw_text(room_width,room_height,"Client Socket: " + string(client_sock))
->>>>>>> origin/master
-=======
-draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
->>>>>>> refs/remotes/origin/Changes
 </string>
           </argument>
         </arguments>
