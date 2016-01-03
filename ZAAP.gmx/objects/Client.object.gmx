@@ -123,7 +123,8 @@ var me = ds_map_find_value(players,sss)
 if me &gt; 0
     {
     var dir = point_direction(me.x,me.y,mouse_x,mouse_y)
-    Packet_8(x,y,dir,5,0,"fire")
+    //2 is a projectile
+    Packet_8(me.x,me.y,dir,5,0,2)
     }
 </string>
           </argument>

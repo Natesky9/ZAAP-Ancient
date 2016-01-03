@@ -55,15 +55,24 @@ switch(packet)
 //-----------------------------------------//
     case 8:
         {
-        show_debug_message("firing!")
-        var objx = buffer_read(buffer_client,buffer_s32)
-        var objy = buffer_read(buffer_client,buffer_s32)
-        var dir = buffer_read(buffer_client,buffer_f32)
-        var spd = buffer_read(buffer_client,buffer_f32)
-        var sock = buffer_read(buffer_client,buffer_u8)
-        var obj = buffer_read(buffer_client,buffer_string)
+        var objx = buffer_read(buff,buffer_s32)
+        var objy = buffer_read(buff,buffer_s32)
+        var dir = buffer_read(buff,buffer_f32)
+        var spd = buffer_read(buff,buffer_f32)
+        var sock = buffer_read(buff,buffer_u8)
+        var obj = buffer_read(buff,buffer_u8)
+        
+        show_debug_message("Client recieved")
+        show_debug_message(string(objx))
+        show_debug_message(string(objy))
+        show_debug_message(string(dir))
+        show_debug_message(string(spd))
+        show_debug_message(string(sock))
         show_debug_message(string(obj))
-        if obj == "fire"
+        show_debug_message("End Client revieve")
+        
+        
+        if obj == 2
             {
             show_debug_message("firing complete")
             show_debug_message("creating at :" + string(objx) + "," + string(objy))

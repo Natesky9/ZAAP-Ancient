@@ -49,7 +49,7 @@
           <argument>
             <kind>1</kind>
             <string>lifetime += 1
-if lifetime &gt; room_speed * 5
+if lifetime &gt; room_speed * 1
     {
     instance_destroy()
     }
