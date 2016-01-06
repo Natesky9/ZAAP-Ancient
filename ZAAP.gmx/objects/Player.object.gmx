@@ -26,9 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>sss = -1
+grid = ds_grid_create(1,1)
 say = "Test"
 ptext = ""
 saytimer = string_length(say)*60
+
+VBuff = noone
 </string>
           </argument>
         </arguments>
@@ -59,12 +62,8 @@ if instance_exists(Client)
         {
         ptext = keyboard_string
         if saytimer &gt;0
-    saytimer -= 1
-    else
-    saytimer = 0
-        
-        with Client
-        Packet_10(other.x,other.y)
+        saytimer -= 1
+        //direction = point_direction(x,y,mouse_x,mouse_y)
         }
     }
 
@@ -165,30 +164,6 @@ if instance_exists(Client)
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>x = mouse_x
-y = mouse_y
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -206,8 +181,22 @@ y = mouse_y
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw the player's text
-if saytimer &gt;0 &amp;&amp; ptext == ""
+            <string>if VBuff != noone
+    {
+    var hoff = ds_grid_width(grid)*8
+    var voff = ds_grid_height(grid)*8
+    
+    d3d_transform_add_translation(-hoff,-voff,0)
+    d3d_transform_add_rotation_z(direction-90)
+    d3d_transform_add_translation(x,y,0)
+    vertex_submit(VBuff,pr_trianglelist,-1)
+    d3d_transform_set_identity()
+    }
+
+//-------------------------------------//
+
+//draw the player's text
+if saytimer &gt; 0 &amp;&amp; ptext == ""
     {
     draw_set_halign(fa_center)
     draw_set_valign(fa_bottom)
@@ -230,7 +219,7 @@ if ptext != ""
 
 draw_set_halign(fa_center)
 draw_set_valign(fa_top)
-draw_sprite(apple,0,x,y)
+//draw_sprite(apple,0,x,y)
 if instance_exists(Client)
     {
     draw_set_color(c_green)

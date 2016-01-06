@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>lifetime = 0
-image_angle += 1
+image_angle = irandom(360)
 </string>
           </argument>
         </arguments>
@@ -50,7 +50,7 @@ image_angle += 1
           <argument>
             <kind>1</kind>
             <string>lifetime += 1
-image_angle += 1
+image_angle += 6
 if lifetime &gt; room_speed * 1
     {
     instance_destroy()
@@ -81,9 +81,19 @@ if lifetime &gt; room_speed * 1
     {
     move_bounce_all(true)
     if instance_exists(Client)
-    effect_create_above(ef_firework,(x+other.x)/2,(y+other.y)/2,1,c_red)
+    effect_create_above(ef_firework,(x+other.x)/2,(y+other.y)/2,0,c_red)
+    if instance_exists(Client)
+        {
+        var old = ds_map_find_value(Client.players,sss)
+        }
+    if instance_exists(Host)
+        {
+        var old = ds_map_find_value(Host.playerobjects,sss)
+        }    
     sss = other.sss
-    lifetime = 0
+    if place_meeting(x,y,old)
+    instance_destroy()
+    lifetime = mean(lifetime/2,lifetime)
     }
 </string>
           </argument>

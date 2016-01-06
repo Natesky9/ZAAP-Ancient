@@ -1,62 +1,52 @@
-var buffer = argument0
-var sss = argument1
-var packet = buffer_read(buffer,buffer_u8)
+var sss = argument0
+var packet = buffer_read(bin,buffer_u8)
 
 switch(packet)
     {
     case 1:
         {
-        var t = buffer_read(buffer,buffer_u32);
-        buffer_seek(buffer_host,buffer_seek_start,0);
-        //packet type
-        buffer_write(buffer_host,buffer_u8,1);
-        buffer_write(buffer_host,buffer_u32,t);
-        network_send_packet(sss,buffer_host,buffer_tell(buffer_host));
+        var t = buffer_read(bin,buffer_u32);
+        seek(bout)
+        buffer_write(bout,buffer_u8,1);
+        buffer_write(bout,buffer_u32,t);
+        network_send_packet(sss,bout,buffer_tell(bout));
         break;
         }
     case 8:
         {
         show_debug_message("Packet 8")
         
-        var objx = buffer_read(buffer,buffer_s32)
-        var objy = buffer_read(buffer,buffer_s32)
-        var dir = buffer_read(buffer,buffer_f32)
-        var spd = buffer_read(buffer,buffer_f32)
-        buffer_read(buffer,buffer_u8)
-        var obj = buffer_read(buffer,buffer_u8)
+        var objx = buffer_read(bin,buffer_s32)
+        var objy = buffer_read(bin,buffer_s32)
+        var dir = buffer_read(bin,buffer_f32)
+        var spd = buffer_read(bin,buffer_f32)
+        buffer_read(bin,buffer_u8)
+        var obj = buffer_read(bin,buffer_u8)
         if obj == 2
             {
-            show_debug_message("firing complete")
-            show_debug_message("creating at :" + string(objx) + "," + string(objy))
             new_obj = instance_create(objx,objy,fire)
             new_obj.direction = dir
             new_obj.speed = spd
             new_obj.sss = sss
             }
-        
-        show_debug_message("Host recieved")
-        show_debug_message(string(objx))
-        show_debug_message(string(objy))
-        show_debug_message(string(dir))
-        show_debug_message(string(spd))
-        show_debug_message(string(obj))
         Packet_8(objx,objy,dir,spd,sss,obj)
         break
         }
     case 10:
         {
         var player = ds_map_find_value(playerobjects,sss)
-        var plax = buffer_read(buffer,buffer_s32)
-        var play = buffer_read(buffer,buffer_s32)
+        var plax = buffer_read(bin,buffer_f32)
+        var play = buffer_read(bin,buffer_f32)
+        var pladir = buffer_read(bin,buffer_f32)
         (player).x = (plax)
         (player).y = (play)
-        Packet_11(sss,plax,play)
+        (player).direction = pladir
+        Packet_11(sss,plax,play,pladir)
         break
         }
     case 21:
         {
-        var psay = buffer_read(buffer,buffer_string)
-        show_debug_message("say")
+        var psay = buffer_read(bin,buffer_string)
         Packet_22(sss,psay)
         break
         }

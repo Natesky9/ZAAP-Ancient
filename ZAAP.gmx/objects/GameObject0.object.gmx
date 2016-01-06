@@ -26,6 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>mode = "choose"
+
+//format create
+vertex_format_begin()
+vertex_format_add_colour()
+vertex_format_add_position()
+global.basic_format = vertex_format_end()
 </string>
           </argument>
         </arguments>
@@ -111,6 +117,7 @@
     draw_set_color(c_black)
     draw_text(room_width-16,16,text)
     }
+    
 if instance_number(Player) &gt; 0
     {
     draw_set_halign(fa_left)

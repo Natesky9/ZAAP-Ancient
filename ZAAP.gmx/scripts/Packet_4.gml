@@ -1,9 +1,9 @@
 //object create script
 
 var sss = argument0
-show_debug_message("Server Side Socket " + string(sss) + " connected")
-    buffer_seek(buffer_host,buffer_seek_start,0);
-    buffer_write(buffer_host,buffer_u8,4);
-    buffer_write(buffer_host,buffer_u8,sss);
-    network_send_packet(sss,buffer_host,buffer_tell(buffer_host));
+seek(bout)
+write_packet(4)
+buffer_write(bout,buffer_u8,sss);
+network_send_packet(sss,bout,tell(bout));
+show_debug_message("Sending packet 4")
 

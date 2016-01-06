@@ -25,13 +25,23 @@
       <script>scripts\Packet_8.gml</script>
       <script>scripts\Packet_10.gml</script>
       <script>scripts\Packet_11.gml</script>
-      <script>scripts\Packet_22.gml</script>
+      <script>scripts\Packet_14.gml</script>
+      <script>scripts\Packet_15.gml</script>
+      <script>scripts\Packet_16.gml</script>
       <script>scripts\Packet_21.gml</script>
+      <script>scripts\Packet_22.gml</script>
     </scripts>
-    <script>scripts\buffer_reset.gml</script>
-    <script>scripts\buffer_write_packet.gml</script>
     <script>scripts\Player_Move.gml</script>
     <script>scripts\Draw_Players.gml</script>
+    <script>scripts\Ship_Draw.gml</script>
+    <script>scripts\Draw_V_Buffer.gml</script>
+    <scripts name="Helper Scripts">
+      <script>scripts\write_sss.gml</script>
+      <script>scripts\read_sss.gml</script>
+      <script>scripts\tell.gml</script>
+      <script>scripts\seek.gml</script>
+      <script>scripts\write_packet.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\Host</object>
