@@ -32,7 +32,10 @@ client_socket = network_create_socket(network_socket_tcp)
 //network_set_config(network_config_connect_timeout,100)
 //network_set_timeout(socket,100,100)
 
-buffer_client = buffer_create(1024,buffer_fixed,1)
+bin = buffer_create(1024,buffer_fixed,1)
+bout = buffer_create(1024,buffer_fixed,1)
+
+playerlist = ds_list_create()
 players = ds_map_create()
 
 result = 0
@@ -64,7 +67,7 @@ ii = 0
           <argument>
             <kind>1</kind>
             <string>network_destroy(client_socket)
-buffer_delete(buffer_client)
+buffer_delete(bbb)
 </string>
           </argument>
         </arguments>
@@ -87,14 +90,13 @@ buffer_delete(buffer_client)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (connected &gt;= 0) &amp;&amp; current_time mod 12 = 0
+            <string>if keyboard_check(vk_shift)
     {
-    buffer_reset(buffer_client);
-    buffer_write(buffer_client,buffer_u8,1);
-    buffer_write(buffer_client,buffer_u32,current_time);
-    network_send_packet(client_socket,buffer_client,buffer_tell(buffer_client));
+    seek(bout)
+    buffer_write(bout,buffer_u8,1);
+    buffer_write(bout,buffer_u32,current_time);
+    network_send_packet(client_socket,bout,buffer_tell(bout));
     }
-
 </string>
           </argument>
         </arguments>
@@ -119,12 +121,10 @@ buffer_delete(buffer_client)
             <kind>1</kind>
             <string>//spawn a projectile
 var me = ds_map_find_value(players,sss)
-
 if me &gt; 0
     {
     var dir = point_direction(me.x,me.y,mouse_x,mouse_y)
-    //2 is a projectile
-    Packet_8(me.x,me.y,dir,5,0,2)
+    Packet_8(me.x,me.y,dir,5,sss,2)
     }
 </string>
           </argument>
@@ -202,12 +202,9 @@ switch (event)
     {
     case network_type_data:
         {
-        var buff = ds_map_find_value(async_load,"buffer")
-        buffer_seek(buff,buffer_seek_start,0)
-        Packet_Get_Client(buff)
-        }
-    default:
-        {
+        bin = ds_map_find_value(async_load,"buffer")
+        seek(bin)
+        Packet_Get_Client()
         break
         }
     }
@@ -238,16 +235,21 @@ sprite_index = sprite3
 else
 sprite_index = sprite2
 
+draw_set_color(c_blue)
 draw_sprite(sprite_index,0,x,y)
+draw_set_valign(fa_top)
 draw_set_halign(fa_right)
-draw_text(room_width,0+32,"Connected: " + string(connected &gt;= 0))
-//draw_text(room_width,48,socket)
-draw_text(room_width,y+64,"Packets: " + string(ping))
+draw_text(room_width,0+64,"Connected: " + string(connected &gt;= 0))
+if keyboard_check(vk_shift)
+    {
+    draw_set_color(c_green)
+    draw_text(room_width,y+80,"Ping: " + string(ping))
+    draw_text(room_width,y+96,"Fps: " + string(fps))
+    draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
+    Draw_Players()
+    }
 
-draw_text(room_width,y + 128,current_time)
-draw_set_valign(fa_bottom)
 
-draw_text(room_width,room_height,"Server Side Socket: " + string(sss))
 </string>
           </argument>
         </arguments>

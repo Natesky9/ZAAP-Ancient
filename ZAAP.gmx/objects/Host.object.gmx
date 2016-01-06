@@ -26,9 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>server = -1
-buffer_host = buffer_create(1024,buffer_fixed,1)
+bin = buffer_create(1024,buffer_fixed,1)
+bout = buffer_create(1024,buffer_fixed,1)
 playerlist = ds_list_create()
 playerobjects = ds_map_create()
+
 </string>
           </argument>
         </arguments>
@@ -51,30 +53,9 @@ playerobjects = ds_map_create()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_black)
-draw_set_halign(fa_left)
-draw_set_valign(fa_top)
-draw_text(0,0,"Server Status: " + string(server &gt;= 0))
-draw_text(0,16,"Total Clients: " + string(ds_list_size(playerlist)))
-
-draw_sprite(sprite1,0,x,y)
-
-var i = 0
-repeat 3
-    {
-    var p = ds_list_find_value(playerlist,i)
-    draw_text(0,64+16*i,"Player "+string(i)+": "+ string(p))
-    if !is_undefined(p)
-        {
-        var po = ds_map_find_value(playerobjects,p)
-        var px = po.x
-        var py = po.y
-        draw_set_color(c_white)
-        draw_line(64,64+16*i,px,py)
-        }
-    i += 1
-    }
-
+            <string>network_destroy(server)
+buffer_delete(bin)
+buffer_delete(bout)
 </string>
           </argument>
         </arguments>
@@ -97,7 +78,13 @@ repeat 3
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>network_destroy(server)
+            <string>if keyboard_check(vk_shift)
+    {
+    seek(bout)
+    buffer_write(bout,buffer_u8,1);
+    buffer_write(bout,buffer_u32,current_time);
+    network_send_packet(client_socket,bout,buffer_tell(bout));
+    }
 </string>
           </argument>
         </arguments>
@@ -144,7 +131,7 @@ repeat 3
           <argument>
             <kind>1</kind>
             <string>var event = ds_map_find_value(async_load,"type")
-var buffer,sss,player
+var sss,player
 switch (event)
     {
 //-----------------------------------//
@@ -152,13 +139,26 @@ switch (event)
         {
         sss = ds_map_find_value(async_load,"socket")
         ds_list_add(playerlist,sss)
-        player = instance_create(64,64,Player)
+        player = instance_create(128,128,Player)
         player.sss = sss
-        ds_map_add(playerobjects,sss,player)
         
+        //get grid
+        var get_grid = ds_grid_create(3,3)
+        ds_grid_clear(get_grid,1)
+        ds_grid_set(get_grid,1,1,2)
+        ds_grid_set(get_grid,0,0,2)
+        ds_grid_set(get_grid,2,0,2)
+        //
+        player.grid = get_grid
+        with player Draw_V_Buffer()
+        ds_map_add(playerobjects,sss,player)
         Packet_4(sss)
         Packet_5(sss)
         Packet_6(sss)
+        Packet_14(sss,get_grid)
+        Packet_15(sss)
+        Packet_16(sss,get_grid)
+        
         break
         }
 //-----------------------------------//
@@ -166,13 +166,13 @@ switch (event)
         {
         sss = ds_map_find_value(async_load,"socket")
         var findsocket = ds_list_find_index(playerlist,sss)
+        ds_list_delete(playerlist,findsocket)
         
         if findsocket &gt;= 0
             {
             Socket_7(sss)
             with (ds_map_find_value(playerobjects,sss))
             instance_destroy()
-            ds_list_delete(playerlist,findsocket)
             ds_map_delete(playerobjects,sss)
             }
         break
@@ -180,10 +180,10 @@ switch (event)
 //-----------------------------------//
     case network_type_data:
         {
-        buffer = ds_map_find_value(async_load,"buffer")
+        bin = ds_map_find_value(async_load,"buffer")
         sss = ds_map_find_value(async_load,"id")
-        buffer_seek(buffer,buffer_seek_start,0)
-        Packet_Get_Host(buffer,sss)
+        seek(bin)
+        Packet_Get_Host(sss)
         break
         }
 //-----------------------------------//
@@ -218,20 +218,15 @@ draw_text(0,16,"Total Clients: " + string(ds_list_size(playerlist)))
 
 draw_sprite(sprite1,0,x,y)
 
-var i = 0
-repeat 3
+for (i = 0;i &lt; ds_list_size(playerlist); i += 1)
     {
     var p = ds_list_find_value(playerlist,i)
     draw_text(0,64+16*i,"Player "+string(i)+": "+ string(p))
-    if !is_undefined(p)
-        {
-        var po = ds_map_find_value(playerobjects,p)
-        var px = po.x
-        var py = po.y
-        draw_set_color(c_white)
-        draw_line(64,64+16*i,px,py)
-        }
-    i += 1
+    var po = ds_map_find_value(playerobjects,p)
+    var px = po.x
+    var py = po.y
+    draw_set_color(c_white)
+    draw_line(64,64+16*i,px,py)
     }
 
 </string>

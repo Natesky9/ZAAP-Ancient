@@ -7,23 +7,28 @@ if sss == Client.sss
         {
         case "left":
             {
-            x -= 1
+            direction += 3
             break
             }
         case "right":
             {
-            x += 1
+            direction -= 3
             break
             }
         case "up":
             {
-            y -= 1
+            x += lengthdir_x(4,direction)
+            y += lengthdir_y(4,direction)
             break
             }
         case "down":
             {
-            y += 1
+            x -= lengthdir_x(1,direction)
+            y -= lengthdir_y(1,direction)
             }
         }
+            
+    with Client
+    Packet_10(other.x,other.y,other.direction)
     }
 

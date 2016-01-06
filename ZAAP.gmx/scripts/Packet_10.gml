@@ -1,11 +1,12 @@
 plax = argument0
 play = argument1
+pladir = argument2
 //replace with packet
+seek(bout)
+write_packet(10)
+buffer_write(bout,buffer_f32,plax)
+buffer_write(bout,buffer_f32,play)
+buffer_write(bout,buffer_f32,pladir)
 
-buffer_seek(buffer_client,buffer_seek_start,0)
-buffer_write(buffer_client,buffer_u8,10)
-buffer_write(buffer_client,buffer_s32,plax)
-buffer_write(buffer_client,buffer_s32,play)
-
-network_send_packet(client_socket,buffer_client,buffer_tell(buffer_client))
+network_send_packet(client_socket,bout,tell(bout))
 
