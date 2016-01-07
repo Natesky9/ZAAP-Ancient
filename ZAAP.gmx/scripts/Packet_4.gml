@@ -1,6 +1,6 @@
 //object create script
 
-var sss = argument0
+var sss = argument[0]
 seek(bout)
 write_packet(4)
 buffer_write(bout,buffer_u8,sss);

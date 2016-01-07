@@ -1,7 +1,9 @@
+
+
 plax = argument0
 play = argument1
 pladir = argument2
-//replace with packet
+
 seek(bout)
 write_packet(10)
 buffer_write(bout,buffer_f32,plax)

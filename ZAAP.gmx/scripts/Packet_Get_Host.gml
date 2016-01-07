@@ -15,21 +15,7 @@ switch(packet)
     case 8:
         {
         show_debug_message("Packet 8")
-        
-        var objx = buffer_read(bin,buffer_s32)
-        var objy = buffer_read(bin,buffer_s32)
-        var dir = buffer_read(bin,buffer_f32)
-        var spd = buffer_read(bin,buffer_f32)
-        buffer_read(bin,buffer_u8)
-        var obj = buffer_read(bin,buffer_u8)
-        if obj == 2
-            {
-            new_obj = instance_create(objx,objy,fire)
-            new_obj.direction = dir
-            new_obj.speed = spd
-            new_obj.sss = sss
-            }
-        Packet_8(objx,objy,dir,spd,sss,obj)
+        Packet_8_Get(sss)
         break
         }
     case 10:

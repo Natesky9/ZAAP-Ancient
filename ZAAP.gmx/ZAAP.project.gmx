@@ -4,13 +4,18 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\click</sound>
+    <sound>sound\clock</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\apple</sprite>
     <sprite>sprites\sprite1</sprite>
     <sprite>sprites\sprite2</sprite>
     <sprite>sprites\sprite3</sprite>
-    <sprite>sprites\sprite4</sprite>
+    <sprite>sprites\banana</sprite>
+    <sprite>sprites\pear</sprite>
+    <sprite>sprites\strawberry</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -23,6 +28,7 @@
       <script>scripts\Packet_6.gml</script>
       <script>scripts\Socket_7.gml</script>
       <script>scripts\Packet_8.gml</script>
+      <script>scripts\Packet_8_Get.gml</script>
       <script>scripts\Packet_10.gml</script>
       <script>scripts\Packet_11.gml</script>
       <script>scripts\Packet_14.gml</script>
@@ -42,6 +48,9 @@
       <script>scripts\seek.gml</script>
       <script>scripts\write_packet.gml</script>
     </scripts>
+    <script>scripts\Define.gml</script>
+    <script>scripts\write.gml</script>
+    <script>scripts\read.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Host</object>

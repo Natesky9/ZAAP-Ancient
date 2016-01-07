@@ -1,7 +1,7 @@
 //send newly connected Server Side Socket to all previous sockets
 show_debug_message("Sending Packet 5")
 
-var sss = argument0
+var sss = argument[0]
 var plax = 0
 var play = 0
 var num = ds_list_size(playerlist)
