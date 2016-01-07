@@ -1,6 +1,6 @@
 //send all players the disconnected socket
 
-var sss = argument0
+var sss = argument[0]
 
 for (i = 0;i < ds_list_size(playerlist);i += 1)
     {

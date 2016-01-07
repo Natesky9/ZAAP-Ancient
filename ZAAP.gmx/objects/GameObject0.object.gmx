@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>mode = "choose"
 
+Define()
+
 //format create
 vertex_format_begin()
 vertex_format_add_colour()

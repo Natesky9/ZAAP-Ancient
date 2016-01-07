@@ -1,1 +1,1 @@
-return buffer_read(bin,buffer_u8)
+return read(b.u8)

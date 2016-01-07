@@ -60,6 +60,8 @@ switch(packet)
 //-----------------------------------------//
     case 8:
         {
+        Packet_8_Get()
+/*        
         var objx = buffer_read(bin,buffer_s32)
         var objy = buffer_read(bin,buffer_s32)
         var dir = buffer_read(bin,buffer_f32)
@@ -74,6 +76,7 @@ switch(packet)
             new_obj.speed = spd
             new_obj.sss = sock
             }
+*/
        break
         }
 //-----------------------------------------//

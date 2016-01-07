@@ -121,10 +121,35 @@ buffer_delete(bbb)
             <kind>1</kind>
             <string>//spawn a projectile
 var me = ds_map_find_value(players,sss)
-if me &gt; 0
+if !is_undefined(me)
     {
     var dir = point_direction(me.x,me.y,mouse_x,mouse_y)
-    Packet_8(me.x,me.y,dir,5,sss,2)
+//obj.bullet,obj.plasma,obj.laser,obj.tachyon
+    var o = choose(obj.bullet,obj.plasma,obj.laser)//,obj.tachyon)
+    if keyboard_string == string(obj.bullet) o = real(keyboard_string)
+    if keyboard_string == string(obj.plasma) o = real(keyboard_string)
+    if keyboard_string == string(obj.laser) o = real(keyboard_string)
+    
+    
+    switch o
+        {
+        case obj.bullet:
+            {
+            Packet_8(o,me.x,me.y,dir,5)
+            break
+            }
+        case obj.plasma:
+            {
+            Packet_8(o,me.x,me.y,dir,2,255,0,0)
+            break
+            }
+        case obj.laser:
+            {
+            Packet_8(o,me.x,me.y,dir,)
+            break
+            }
+        }
+    
     }
 </string>
           </argument>
