@@ -15,7 +15,7 @@ for (i = 0; i < num;i += 1)
     var get_player = ds_list_find_value(playerlist,i)
     if get_player != sss
         {
-        var player_obj = ds_map_find_value(playerobjects,get_player)
+        var player_obj = ds_map_find_value(players,get_player)
         var plax = player_obj.x
         var play = player_obj.y
         

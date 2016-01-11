@@ -32,6 +32,7 @@ ptext = ""
 saytimer = string_length(say)*60
 
 VBuff = noone
+target = 0
 </string>
           </argument>
         </arguments>
@@ -61,12 +62,17 @@ if instance_exists(Client)
     if sss == Client.sss
         {
         ptext = keyboard_string
-        if saytimer &gt;0
-        saytimer -= 1
-        //direction = point_direction(x,y,mouse_x,mouse_y)
         }
     }
 
+if saytimer &gt;0
+saytimer -= 1
+
+if target &gt; 0
+    {
+    x = mean(x,target.x)
+    y = mean(y, target.y)
+    }
 </string>
           </argument>
         </arguments>
@@ -232,6 +238,12 @@ if place_meeting(x,y,Player)
     {
     draw_set_color(c_red)
     draw_circle(x,y,16,true)
+    }
+    
+if target &gt; 0
+    {
+    draw_set_color(c_red)
+    draw_line(x,y,target.x,target.y)
     }
 </string>
           </argument>

@@ -28,8 +28,12 @@
             <string>server = -1
 bin = buffer_create(1024,buffer_fixed,1)
 bout = buffer_create(1024,buffer_fixed,1)
+
 playerlist = ds_list_create()
-playerobjects = ds_map_create()
+players = ds_map_create()
+
+shipyardlist = ds_list_create()
+shipyards = ds_map_create()
 
 </string>
           </argument>
@@ -61,7 +65,7 @@ buffer_delete(bout)
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="5">
+    <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -78,13 +82,8 @@ buffer_delete(bout)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check(vk_shift)
-    {
-    seek(bout)
-    buffer_write(bout,buffer_u8,1);
-    buffer_write(bout,buffer_u32,current_time);
-    network_send_packet(client_socket,bout,buffer_tell(bout));
-    }
+            <string>if server &gt;= 0
+Packet_8(obj.shipyard,mouse_x,mouse_y,128,128)
 </string>
           </argument>
         </arguments>
@@ -151,7 +150,7 @@ switch (event)
         //
         player.grid = get_grid
         with player Draw_V_Buffer()
-        ds_map_add(playerobjects,sss,player)
+        ds_map_add(players,sss,player)
         Packet_4(sss)
         Packet_5(sss)
         Packet_6(sss)
@@ -171,9 +170,9 @@ switch (event)
         if findsocket &gt;= 0
             {
             Socket_7(sss)
-            with (ds_map_find_value(playerobjects,sss))
+            with (ds_map_find_value(players,sss))
             instance_destroy()
-            ds_map_delete(playerobjects,sss)
+            ds_map_delete(players,sss)
             }
         break
         }
@@ -222,7 +221,7 @@ for (i = 0;i &lt; ds_list_size(playerlist); i += 1)
     {
     var p = ds_list_find_value(playerlist,i)
     draw_text(0,64+16*i,"Player "+string(i)+": "+ string(p))
-    var po = ds_map_find_value(playerobjects,p)
+    var po = ds_map_find_value(players,p)
     var px = po.x
     var py = po.y
     draw_set_color(c_white)

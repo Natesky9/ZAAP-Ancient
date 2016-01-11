@@ -16,6 +16,7 @@
     <sprite>sprites\banana</sprite>
     <sprite>sprites\pear</sprite>
     <sprite>sprites\strawberry</sprite>
+    <sprite>sprites\tile</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -29,6 +30,7 @@
       <script>scripts\Socket_7.gml</script>
       <script>scripts\Packet_8.gml</script>
       <script>scripts\Packet_8_Get.gml</script>
+      <script>scripts\Packet_9.gml</script>
       <script>scripts\Packet_10.gml</script>
       <script>scripts\Packet_11.gml</script>
       <script>scripts\Packet_14.gml</script>
@@ -47,18 +49,25 @@
       <script>scripts\tell.gml</script>
       <script>scripts\seek.gml</script>
       <script>scripts\write_packet.gml</script>
+      <script>scripts\write.gml</script>
+      <script>scripts\read.gml</script>
     </scripts>
     <script>scripts\Define.gml</script>
-    <script>scripts\write.gml</script>
-    <script>scripts\read.gml</script>
+    <script>scripts\Text_Wrap.gml</script>
+    <script>scripts\is_host.gml</script>
+    <script>scripts\is_client.gml</script>
+    <script>scripts\random_string.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\font0</font>
+  </fonts>
   <objects name="objects">
     <object>objects\Host</object>
     <object>objects\Player</object>
     <object>objects\Client</object>
     <object>objects\GameObject0</object>
     <object>objects\fire</object>
-    <object>objects\object5</object>
+    <object>objects\Shipyard</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Main</room>

@@ -14,7 +14,7 @@ for (i = 0; i < num;i += 1)
     if get_player != sss
         {
         buffer_write(bout,buffer_u8,get_player)
-        var pal = ds_map_find_value(playerobjects,get_player)
+        var pal = ds_map_find_value(players,get_player)
         var get_grid = pal.grid
         var jj = ds_grid_width(get_grid)
         var kk = ds_grid_height(get_grid)

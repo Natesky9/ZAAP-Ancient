@@ -20,7 +20,7 @@ switch(packet)
         }
     case 10:
         {
-        var player = ds_map_find_value(playerobjects,sss)
+        var player = ds_map_find_value(players,sss)
         var plax = buffer_read(bin,buffer_f32)
         var play = buffer_read(bin,buffer_f32)
         var pladir = buffer_read(bin,buffer_f32)
@@ -33,7 +33,10 @@ switch(packet)
     case 21:
         {
         var psay = buffer_read(bin,buffer_string)
-        Packet_22(sss,psay)
+        var player = ds_map_find_value(players,sss)
+        (player).say = (psay)
+        (player).saytimer = string_length(psay)*room_speed/2
+        Packet_22(sss,psay) 
         break
         }
     }

@@ -61,23 +61,21 @@ switch(packet)
     case 8:
         {
         Packet_8_Get()
-/*        
-        var objx = buffer_read(bin,buffer_s32)
-        var objy = buffer_read(bin,buffer_s32)
-        var dir = buffer_read(bin,buffer_f32)
-        var spd = buffer_read(bin,buffer_f32)
-        var sock = read_sss()
-        var obj = buffer_read(bin,buffer_u8)
+        break
+        }
+//-----------------------------------------//
+    case 9:
+        {
+        get_ssn = read(b.text)
         
-        if obj == 2
-            {
-            new_obj = instance_create(objx,objy,fire)
-            new_obj.direction = dir
-            new_obj.speed = spd
-            new_obj.sss = sock
-            }
-*/
-       break
+        var get_object = ds_map_find_value(shipyards,get_ssn)
+        var pos = ds_list_find_index(shipyardlist,get_ssn)
+        ds_list_delete(shipyardlist,pos)
+        ds_map_delete(shipyards,get_ssn)
+        
+        with get_object
+            instance_destroy()
+        break
         }
 //-----------------------------------------//
 
@@ -186,7 +184,7 @@ switch(packet)
         var get_say = buffer_read(bin,buffer_string)
         var pal = ds_map_find_value(players,get_sss)
         (pal).say = (get_say)
-        (pal).saytimer = string_length(get_say)*60
+        (pal).saytimer = string_length(get_say)*room_speed/2
         }
         break
     }

@@ -1,14 +1,29 @@
 //=======================================================//
 if object_index == Client
     {
-    var get_sss = read_sss()
     var o = read(b.u8)
     
     switch o
         {
+        case obj.shipyard:
+            {
+            var get_ssn = read(b.text)
+            var objx = read(b.s32)
+            var objy = read(b.s32)
+            var objw = read(b.u8)
+            var objh = read(b.u8)
+            
+            var object = instance_create(objx,objy,Shipyard)
+            (object).ssn = get_ssn
+            
+            ds_list_add(shipyardlist,get_ssn)
+            ds_map_add(shipyards,get_ssn,object)
+            break
+            }
         //------------------------------//
         case obj.bullet:
             {
+            var get_sss = read_sss()
             var objx = read(b.s32)
             var objy = read(b.s32)
             var dir = read(b.f32)
@@ -25,6 +40,7 @@ if object_index == Client
         //------------------------------//
         case obj.plasma:
             {
+            var get_sss = read_sss()
             var objx = read(b.s32)
             var objy = read(b.s32)
             var dir = read(b.f32)
@@ -44,6 +60,7 @@ if object_index == Client
         //------------------------------//
         case obj.laser:
             {
+            var get_sss = read_sss()
             var objx = read(b.s32)
             var objy = read(b.s32)
             var dir = read(b.f32)
@@ -56,6 +73,7 @@ if object_index == Client
             break
             }
         }
+    exit
     }
 //=======================================================//
 if object_index == Host
@@ -73,7 +91,7 @@ if object_index == Host
             var dir = read(b.f32)
             var spd = read(b.u8)
             
-            Packet_8(sss,o,objx,objy,dir,spd)
+            Packet_8(o,sss,objx,objy,dir,spd)
             
             var new_obj = instance_create(objx,objy,fire)
             (new_obj).sprite_index = (banana)
@@ -94,7 +112,7 @@ if object_index == Host
             var colg = read(b.u8)
             var colb = read(b.u8)
             
-            Packet_8(sss,o,objx,objy,dir,spd,colr,colg,colb)
+            Packet_8(o,sss,objx,objy,dir,spd,colr,colg,colb)
             
             var new_obj = instance_create(objx,objy,fire)
             (new_obj).sprite_index = (pear)
@@ -111,7 +129,7 @@ if object_index == Host
             var objy = read(b.s32)
             var dir = read(b.f32)
             
-            Packet_8(sss,o,objx,objy,dir)
+            Packet_8(o,sss,objx,objy,dir)
         
             var xx = lengthdir_x(16,dir)
             var yy = lengthdir_y(16,dir)
@@ -127,5 +145,6 @@ if object_index == Host
             }
         //------------------------------//
         }
+    exit
     }
 //=======================================================//
