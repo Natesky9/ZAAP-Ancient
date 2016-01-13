@@ -1,10 +1,11 @@
-var packet = buffer_read(bin,buffer_u8);
-
+//client packet receiving
+var packet = read(b.u8);
+//=======================================================//
 switch(packet)
     {
     case 1:
         {
-        var time = buffer_read(bin,buffer_u32);
+        var time = read(buffer_u32);
         ping = current_time - time;
         break;
         }
@@ -23,12 +24,12 @@ switch(packet)
 //-----------------------------------------//
     case 5:
         {
-        var num = buffer_read(bin,buffer_u8)
+        var num = read(b.u8)
         repeat (num)
             {
             var get_sss = read_sss()
-            var plax = buffer_read(bin,buffer_s32)
-            var play = buffer_read(bin,buffer_s32)
+            var plax = read(buffer_s32)
+            var play = read(buffer_s32)
             
             var pal = instance_create(plax,play,Player)
             ds_list_add(playerlist,get_sss)
@@ -79,12 +80,12 @@ switch(packet)
         }
 //-----------------------------------------//
 
-    case 11:
+    case 10:
         {
         var get_sss = read_sss()
-        var plax = buffer_read(bin,buffer_f32)
-        var play = buffer_read(bin,buffer_f32)
-        var pladir = buffer_read(bin,buffer_f32)
+        var plax = read(buffer_f32)
+        var play = read(buffer_f32)
+        var pladir = read(buffer_f32)
         var player_temp = ds_map_find_value(players,get_sss)
         if !is_undefined(player_temp)
             {
@@ -101,8 +102,8 @@ switch(packet)
         var pal = ds_map_find_value(players,sss)
         var get_sss = read_sss()
         
-        var jj = buffer_read(bin,buffer_u8)
-        var kk = buffer_read(bin,buffer_u8)
+        var jj = read(b.u8)
+        var kk = read(b.u8)
         ds_grid_resize(pal.grid,jj,kk)
         ds_grid_clear(pal.grid,0)
         
@@ -110,7 +111,7 @@ switch(packet)
             {
             for (j = 0;j < jj;j += 1)
                 {
-                var v = buffer_read(bin,buffer_u8,)
+                var v = read(b.u8,)
                 ds_grid_set(pal.grid,j,k,v)
                 }
             }
@@ -124,14 +125,14 @@ switch(packet)
 //-----------------------------------------//
     case 15:
         {
-        var num = buffer_read(bin,buffer_u8)
+        var num = read(b.u8)
         
         for (i = 0;i < num;i += 1)
             {
-            var get_sss = buffer_read(bin,buffer_u8)
+            var get_sss = read(b.u8)
             var pal = ds_map_find_value(players,get_sss)
-            var jj = buffer_read(bin,buffer_u8)
-            var kk = buffer_read(bin,buffer_u8)
+            var jj = read(b.u8)
+            var kk = read(b.u8)
             ds_grid_resize(pal.grid,jj,kk)
             ds_grid_clear(pal.grid,0)
             show_debug_message("Writing grid for player")
@@ -140,7 +141,7 @@ switch(packet)
                 {
                 for (j = 0; j < jj;j += 1)
                     {
-                    var n = buffer_read(bin,buffer_u8)
+                    var n = read(b.u8)
                     ds_grid_set(pal.grid,j,k,n)
                     }
                 }
@@ -155,8 +156,8 @@ switch(packet)
         {
         show_debug_message("receiving NEW grid data")
         var get_sss = read_sss()
-        var jj = buffer_read(bin,buffer_u8)
-        var kk = buffer_read(bin,buffer_u8)
+        var jj = read(b.u8)
+        var kk = read(b.u8)
         var pal = ds_map_find_value(players,get_sss)
         ds_grid_resize(pal.grid,jj,kk)
         ds_grid_clear(pal.grid,0)
@@ -165,7 +166,7 @@ switch(packet)
             {
             for (j = 0;j < jj;j += 1)
                 {
-                var v = buffer_read(bin,buffer_u8,)
+                var v = read(b.u8,)
                 ds_grid_set(pal.grid,j,k,v)
                 }
             }
@@ -178,17 +179,17 @@ switch(packet)
         }
 //-----------------------------------------//
 
-    case 22:
+    case 3:
         {
         var get_sss = read_sss()
-        var get_say = buffer_read(bin,buffer_string)
+        var get_say = read(buffer_string)
         var pal = ds_map_find_value(players,get_sss)
         (pal).say = (get_say)
         (pal).saytimer = string_length(get_say)*room_speed/2
         }
         break
     }
-
+//=======================================================//
 
 
 //Phew, that's alot to read, innit?

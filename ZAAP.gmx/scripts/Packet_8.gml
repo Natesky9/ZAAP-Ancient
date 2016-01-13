@@ -73,7 +73,7 @@ if object_index == Host
     {
     var o = argument[0]
     //start new code
-
+    
     seek(bout)
     write_packet(8)
     write(b.u8,o)
@@ -168,6 +168,12 @@ if object_index == Host
         //------------------------------//
         }
     //
+    
+    
+    ds_grid_add(packets,8,0,1)
+    ds_grid_add(packets,8,1,tell(bout))
+    show_debug_message("adding 8")
+    
     for (i = 0;i < ds_list_size(playerlist);i += 1)
         {
         var sock = ds_list_find_value(playerlist,i)

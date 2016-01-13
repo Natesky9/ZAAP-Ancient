@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>server = -1
+            <string>lifetime = 0
+
+server = -1
 bin = buffer_create(1024,buffer_fixed,1)
 bout = buffer_create(1024,buffer_fixed,1)
 
@@ -35,6 +37,14 @@ players = ds_map_create()
 shipyardlist = ds_list_create()
 shipyards = ds_map_create()
 
+packets = ds_grid_create(12,6)
+
+old_num = 0
+cur_num = 0
+new_num = 0
+old_size = 0
+cur_size = 0
+new_size = 0
 </string>
           </argument>
         </arguments>
@@ -60,6 +70,29 @@ shipyards = ds_map_create()
             <string>network_destroy(server)
 buffer_delete(bin)
 buffer_delete(bout)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>lifetime += 1
 </string>
           </argument>
         </arguments>
@@ -167,7 +200,7 @@ switch (event)
         var findsocket = ds_list_find_index(playerlist,sss)
         ds_list_delete(playerlist,findsocket)
         
-        if findsocket &gt;= 0
+        if findsocket &lt;= 0
             {
             Socket_7(sss)
             with (ds_map_find_value(players,sss))
@@ -209,7 +242,13 @@ switch (event)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_black)
+            <string>var t
+var v
+
+var rh = room_height
+
+//draw server status
+draw_set_color(c_black)
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 draw_text(0,0,"Server Status: " + string(server &gt;= 0))
@@ -228,6 +267,83 @@ for (i = 0;i &lt; ds_list_size(playerlist); i += 1)
     draw_line(64,64+16*i,px,py)
     }
 
+//packet display
+//draw the frame
+var w = ds_grid_width(packets)*16
+draw_set_color(c_gray)
+draw_rectangle(0,rh,w,256,false)
+
+draw_set_color(c_black)
+draw_set_halign(fa_center)
+draw_set_valign(fa_bottom)
+
+if (lifetime mod 60 == 0)
+    {
+    show_debug_message("averages")
+    }
+    
+for (i = 1;i &lt; ds_grid_width(packets);i += 1)
+    {
+    old_num = ds_grid_get(packets,i,pack.keepnumber)
+    old_size = ds_grid_get(packets,i,pack.keepsize)
+    cur_num = ds_grid_get(packets,i,pack.countnumber)
+    cur_size = ds_grid_get(packets,i,pack.countsize)
+    new_num = ds_grid_get(packets,i,pack.averagenumber)
+    new_size = ds_grid_get(packets,i,pack.averagesize)
+    
+    if (lifetime mod 30 == 0)
+        {//update average
+        ds_grid_set(packets,i,pack.keepnumber,cur_num)
+        ds_grid_set(packets,i,pack.countnumber,0)
+        
+        
+        ds_grid_set(packets,i,pack.keepsize,cur_size)
+        ds_grid_set(packets,i,pack.countsize,0)
+        }
+
+    ds_grid_set(packets,i,pack.averagenumber,(old_num+new_num*9)/10)
+    ds_grid_set(packets,i,pack.averagesize,(old_size+new_size*9)/10)
+    
+    //--------------------------------------//
+    //draw packet lines
+    draw_set_color(c_red)
+    v = ds_grid_get(packets,i,pack.keepnumber)
+    draw_rectangle(w+i*16+2,rh,w+i*16+14,
+                    rh-min(v*16,256),true)
+    //draw packet size lines
+    draw_set_color(c_yellow)
+    v = ds_grid_get(packets,i,pack.keepsize)
+    draw_rectangle(w+i*16,rh,w+i*16+16,
+                    rh-min(v*8,256),true)
+    //--------------------------------------//
+    //draw packet average
+    draw_set_color(c_green)
+    v = ds_grid_get(packets,i,pack.averagenumber)
+    draw_rectangle(i*16,rh,i*16+16,
+                    rh-min(v*16,256),false)
+    //draw packet size average
+    draw_set_color(c_aqua)
+    v = ds_grid_get(packets,i,pack.averagesize)
+    draw_rectangle(i*16,rh,i*16+16,
+                    rh-min(v*8,256),false)
+    //--------------------------------------//
+    //draw packet and packet size text
+    //soon to be removed
+    draw_set_color(c_white)
+    t = ds_grid_get(packets,i,pack.keepnumber)
+    draw_text(w+16*i+8,rh-t*16,string(t))
+    t = ds_grid_get(packets,i,pack.keepsize)
+    draw_text(w+16*i+8,rh-t*8,string(t))
+    //--------------------------------------//
+    //draw average and average size text
+    draw_set_color(c_blue)
+    t = ds_grid_get(packets,i,pack.averagenumber)
+    draw_text(16*i+8,room_height-32,string(t))
+    t = ds_grid_get(packets,i,pack.averagesize)
+    draw_text(16*i+8,room_height-64,string(t))
+    //--------------------------------------//
+    }
+    
 </string>
           </argument>
         </arguments>

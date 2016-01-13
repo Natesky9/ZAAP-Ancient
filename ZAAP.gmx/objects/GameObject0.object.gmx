@@ -121,7 +121,7 @@ sound_global_volume(.1)
     draw_set_color(c_black)
     draw_text(room_width-16,16,text)
     }
-    
+/*    
 if instance_number(Player) &gt; 0
     {
     draw_set_halign(fa_left)
@@ -129,6 +129,7 @@ if instance_number(Player) &gt; 0
     draw_set_color(c_black)
     draw_text(0,room_height,"Players: " + string(instance_number(Player)))
     }
+*/
 </string>
           </argument>
         </arguments>

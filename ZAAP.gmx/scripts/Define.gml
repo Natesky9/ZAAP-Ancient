@@ -27,3 +27,12 @@ enum obj
     laser = 13,
     tachyon = 14,
     }
+enum pack
+    {
+    countnumber = 0,
+    countsize = 1,
+    keepnumber = 2,
+    keepsize = 3,
+    averagenumber = 4,
+    averagesize = 5,
+    }

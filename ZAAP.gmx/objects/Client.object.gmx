@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sss = -1
+            <string>lifetime = 0
+sss = -1
 
 client_socket = network_create_socket(network_socket_tcp)
 
@@ -93,12 +94,10 @@ buffer_delete(bbb)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check(vk_shift) &amp;&amp; (current_time mod 15 = 0)
+            <string>lifetime += 1
+if keyboard_check(vk_shift) or (lifetime mod 15 = 0)
     {
-    seek(bout)
-    buffer_write(bout,buffer_u8,1);
-    buffer_write(bout,buffer_u32,current_time);
-    network_send_packet(client_socket,bout,buffer_tell(bout));
+    Packet_1()
     }
 </string>
           </argument>
@@ -360,7 +359,7 @@ else
             <kind>1</kind>
             <string>var ptext = keyboard_string
 keyboard_string = ""
-Packet_21(ptext)
+Packet_3(ptext)
 </string>
           </argument>
         </arguments>

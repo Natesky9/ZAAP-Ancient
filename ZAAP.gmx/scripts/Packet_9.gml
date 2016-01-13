@@ -1,7 +1,7 @@
 //object destroy script
 
 //=======================================================//
-if is_host()
+if object_index == Host
     {
     var ssn = argument[0]
     
@@ -16,6 +16,10 @@ if is_host()
     seek(bout)
     write(b.u8,9)
     write(b.text,ssn)
+    
+    ds_grid_add(packets,9,0,1)
+    ds_grid_add(packets,9,1,tell(bout))
+    show_debug_message("adding 9")
     
     for (i = 0;i < ds_list_size(playerlist);i += 1)
         {

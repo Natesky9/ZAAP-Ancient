@@ -1,6 +1,7 @@
 //packet for host to send to all objects, updating the
 //x and y of an object
-
+//OLD PACKET, MIGRATED TO PACKET 10!
+/*
 var sss = argument0
 var plax = argument1
 var play = argument2
@@ -24,3 +25,5 @@ for (i = 0;i <= p;i += 1)
         network_send_packet(get_socket,bout,tell(bout))
         }
     }
+    
+*/

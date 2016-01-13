@@ -24,6 +24,8 @@
     <script>scripts\Packet_Get_Client.gml</script>
     <script>scripts\Packet_Get_Host.gml</script>
     <scripts name="Packets">
+      <script>scripts\Packet_1.gml</script>
+      <script>scripts\Packet_3.gml</script>
       <script>scripts\Packet_4.gml</script>
       <script>scripts\Packet_5.gml</script>
       <script>scripts\Packet_6.gml</script>
@@ -36,7 +38,6 @@
       <script>scripts\Packet_14.gml</script>
       <script>scripts\Packet_15.gml</script>
       <script>scripts\Packet_16.gml</script>
-      <script>scripts\Packet_21.gml</script>
       <script>scripts\Packet_22.gml</script>
     </scripts>
     <script>scripts\Player_Move.gml</script>
